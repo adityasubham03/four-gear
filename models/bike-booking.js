@@ -25,7 +25,21 @@ const BikeBookingSchema = new Schema(
         bike_Model: {
             type: String,
             required: true,
-        },
+		},
+		address: {
+			type: String,
+			required: true,
+		},
+		map: {
+			longitude: {
+				type: Number,
+				required: true,
+			},
+			latitude: {
+				type: Number,
+				required: true,
+			},
+		},
 	},
 	{ timestamps: true }
 );

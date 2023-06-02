@@ -175,7 +175,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"name\":\"Aditya Choudhury\",\n    \"phone\":9668111905,\n    \"email\":\"adityasubham03@gmail.com\",\n    \"city\":\"Bhubaneswar\",\n    \"bike_Company\":\"Hero\",\n    \"bike_Model\":\"Xtreme 2013\"\n}",
+							"raw": "{\n    \"name\":\"Aditya Choudhury\",\n    \"phone\":9668111905,\n    \"email\":\"adityasubham03@gmail.com\",\n    \"city\":\"Bhubaneswar\",\n    \"bike_Company\":\"Hero\",\n    \"bike_Model\":\"Xtreme 2013\",\n    \"address\":\"ganga nagar\",\n    \"map\":{\n        \"longitude\":34.34667797,\n        \"latitude\":68.23543676\n    }\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -229,6 +229,62 @@
 								"api",
 								"bookings",
 								"bike"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Partners",
+			"item": [
+				{
+					"name": "Register Partners",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Partner Name\",\n  \"phone\": 1234567890,\n  \"email\": \"partner@example.com\",\n  \"address\": \"Partner Address\",\n  \"adhaarNumber\": 123456789012,\n  \"accountNumber\": 9876543210,\n  \"IFSC\": \"ABCD1234567\",\n  \"ownerPic\": \"owner.jpg\",\n  \"shopPic\": \"shop.jpg\",\n  \"noMechanics\": 2,\n  \"mechanicDetails\": [\n    {\n      \"name\": \"John Doe\",\n      \"contact\": 9876543210,\n      \"address\": \"Mechanic 1 Address\",\n      \"photo\": \"mechanic1.jpg\"\n    },\n    {\n      \"name\": \"Jane Smith\",\n      \"contact\": 1234567890,\n      \"address\": \"Mechanic 2 Address\",\n      \"photo\": \"mechanic2.jpg\"\n    }\n  ]\n}\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/partners/register",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"partners",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Partners",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/api/partners/1234",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"partners",
+								"1234"
 							]
 						}
 					},

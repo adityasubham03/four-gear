@@ -4,7 +4,8 @@ const cors = require("cors");
 const { DB, REQUEST_TIMEOUT, PORT } = require("./config/db");
 const { success, error } = require("consola");
 const auth = require("./routes/auth-routes");
-const book = require("./routes/servicing-routes")
+const book = require("./routes/servicing-routes");
+const partners = require("./routes/partner-routes");
 const booking = require("./routes/view-bookings")
 
 const app = express();
@@ -44,6 +45,7 @@ app.get("/api/health", (req, res) => {
 app.use("/api/auth", auth);
 app.use("/api/book", book);
 app.use("/api/bookings", booking);
+app.use("/api/partners", partners);
 
 
 

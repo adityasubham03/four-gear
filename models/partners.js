@@ -2,26 +2,65 @@ const { Schema, model } = require("mongoose");
 
 const PartnerSchema = new Schema(
 	{
-		fname: {
+		name: {
 			type: String,
 			required: true,
 		},
-		lname: {
-			type: String,
+		phone: {
+			type: Number,
 			required: true,
 		},
 		email: {
 			type: String,
-			required: true,
 		},
-		password: {
+		address: {
 			type: String,
 			required: true,
-        },
-        level: {
-			type: Number,
-			default: 1,
 		},
+		adhaarNumber: {
+			type: Number,
+			required: true,
+		},
+		accountNumber: {
+			type: Number,
+			required: true,
+		},
+		IFSC: {
+			type: String,
+			required: true,
+		},
+		ownerPic: {
+			type: String,
+			required: true,
+		},
+		shopPic: {
+			type: String,
+			required: true,
+		},
+		noMechanics: {
+			type: Number,
+			required: true,
+		},
+		mechanicDetails: [
+			{
+				name: {
+					type: String,
+					required: true,
+				},
+				contact: {
+					type: Number,
+					required: true,
+				},
+				address: {
+					type: String,
+					required: true,
+				},
+				photo: {
+					type: String,
+					required: true,
+				},
+			},
+		],
 	},
 	{ timestamps: true }
 );
