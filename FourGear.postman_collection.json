@@ -1,0 +1,240 @@
+{
+	"info": {
+		"_postman_id": "faf750ab-014e-4802-9684-399c6d6f184e",
+		"name": "FourGear",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "25346498"
+	},
+	"item": [
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "Sign Up",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"fname\":\"Aditya\",\n    \"lname\":\"Choudhury\",\n    \"email\":\"adityasubham03@gmail.com\",\n    \"password\":\"27Adich@\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/auth/register",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"auth",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\":\"adityasubham03@gmail.com\",\n    \"password\":\"27Adich@\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/auth/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get User",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDc5Yjk4YzQ5YjJhYjY3ODkyZDZmODEiLCJmbmFtZSI6IkFkaXR5YSIsImxuYW1lIjoiQ2hvdWRodXJ5IiwiZW1haWwiOiJhZGl0eWFzdWJoYW0wM0BnbWFpbC5jb20iLCJsZXZlbCI6MSwiaWF0IjoxNjg1Njk4OTYzLCJleHAiOjE2ODU3ODUzNjN9.AgUAcVE8JhSW47GLPxwSiefK8FJlf9QPAY1sN0R2HLc",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/api/auth/user",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"auth",
+								"user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Refresh Token",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDc5Yjk4YzQ5YjJhYjY3ODkyZDZmODEiLCJmbmFtZSI6IkFkaXR5YSIsImxuYW1lIjoiQ2hvdWRodXJ5IiwiZW1haWwiOiJhZGl0eWFzdWJoYW0wM0BnbWFpbC5jb20iLCJsZXZlbCI6MSwiaWF0IjoxNjg1Njk4OTYzLCJleHAiOjE2ODU3ODUzNjN9.AgUAcVE8JhSW47GLPxwSiefK8FJlf9QPAY1sN0R2HLc",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/api/auth/refresh",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"auth",
+								"refresh"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get User Admin",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDc5Yjk4YzQ5YjJhYjY3ODkyZDZmODEiLCJmbmFtZSI6IkFkaXR5YSIsImxuYW1lIjoiQ2hvdWRodXJ5IiwiZW1haWwiOiJhZGl0eWFzdWJoYW0wM0BnbWFpbC5jb20iLCJsZXZlbCI6MCwiaWF0IjoxNjg1Njk5MDM0LCJleHAiOjE2ODU3ODU0MzR9.fhEyPrunXpnTXc-dzOy6zA0dQX03L8iwwN0rM5mSkSk",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/api/auth/user/adityasubham03@gmail.com",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"auth",
+								"user",
+								"adityasubham03@gmail.com"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Book",
+			"item": [
+				{
+					"name": "Bike",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\":\"Aditya Choudhury\",\n    \"phone\":9668111905,\n    \"email\":\"adityasubham03@gmail.com\",\n    \"city\":\"Bhubaneswar\",\n    \"bike_Company\":\"Hero\",\n    \"bike_Model\":\"Xtreme 2013\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/book/bike",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"book",
+								"bike"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Bookings",
+			"item": [
+				{
+					"name": "Bike",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDc5Yjk4YzQ5YjJhYjY3ODkyZDZmODEiLCJmbmFtZSI6IkFkaXR5YSIsImxuYW1lIjoiQ2hvdWRodXJ5IiwiZW1haWwiOiJhZGl0eWFzdWJoYW0wM0BnbWFpbC5jb20iLCJsZXZlbCI6MCwiaWF0IjoxNjg1Njk5MDM0LCJleHAiOjE2ODU3ODU0MzR9.fhEyPrunXpnTXc-dzOy6zA0dQX03L8iwwN0rM5mSkSk",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/api/bookings/bike",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"bookings",
+								"bike"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

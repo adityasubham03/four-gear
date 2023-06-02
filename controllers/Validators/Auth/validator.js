@@ -1,0 +1,46 @@
+const Joi = require("joi");
+const User = require("../../../models/Users");
+const jwt = require("jsonwebtoken");
+const { JWT_SECRET } = require("../../../config/db");
+
+const validateEmail = async (email) => {
+	let user = await User.findOne({ email });
+	return user ? false : true;
+};
+
+const loginSchema = Joi.object({
+	email: Joi.string().email().required(),
+	password: Joi.string()
+		.pattern(new RegExp("^[a-zA-Z0-9!@#$%^&*()_]{3,30}$"))
+		.min(8)
+		.required(),
+});
+
+const signupSchema = Joi.object({
+	fname: Joi.string().min(1).required(),
+	lname: Joi.string().min(1).required(),
+	email: Joi.string().email().required(),
+	password: Joi.string()
+		.pattern(new RegExp("^[a-zA-Z0-9!@#$%^&*()_]{3,30}$"))
+		.min(8)
+		.required(),
+});
+
+const isadmin = (req, res, next) => {
+	if (req.level != 0) {
+		return res.status(200).json({
+			reason: "unauthorized",
+			message: "Endpoint not allowed",
+			success: false,
+		});
+	} else {
+		next();
+	}
+};
+
+module.exports = {
+	validateEmail,
+	loginSchema,
+	signupSchema,
+	isadmin,
+};
