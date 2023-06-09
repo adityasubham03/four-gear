@@ -41,7 +41,6 @@ const BikeBookingSchema = new Schema(
 			},
 		},
 	},
-	{ timestamps: true }
 );
 
 module.exports = model("BikeBooking", BikeBookingSchema);
