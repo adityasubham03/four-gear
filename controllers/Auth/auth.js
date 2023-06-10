@@ -159,6 +159,7 @@ const login = async (req, res, next) => {
 			});
 		}
 	} catch (err) {
+		console.log
 		let errorMsg = Login_MSG.loginError;
 		if (err.isJoi === true) {
 			err.status = 403;
@@ -210,6 +211,7 @@ const verifytoken = (req, res, next) => {
 			req.fname = user.fname;
 			req.lname = user.lname;
 			req.email = user.email;
+			req.phone = user.phone;
 			req.level = user.level;
 			req.token = token;
 			next();

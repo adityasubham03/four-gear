@@ -6,5 +6,6 @@ module.exports = {
     REQUEST_TIMEOUT: process.env.REQUEST_TIMEOUT,
     PORT: process.env.PORT ? process.env.PORT : 3000,
     JWT_SECRET: process.env.JWT_SECRET,
-    JWT_REFRESH_TOKEN_SECRET: process.env.JWT_REFRESH_TOKEN_SECRET
+    JWT_REFRESH_TOKEN_SECRET: process.env.JWT_REFRESH_TOKEN_SECRET,
+    FAST2API_API_KEY: process.env.FAST2API_API_KEY,
 }
