@@ -7,6 +7,7 @@ const auth = require("./routes/auth-routes");
 const book = require("./routes/servicing-routes");
 const partners = require("./routes/partner-routes");
 const booking = require("./routes/view-bookings")
+const gallery = require("./routes/gallery-routes");
 
 const app = express();
 
@@ -46,6 +47,7 @@ app.use("/api/auth", auth);
 app.use("/api/book", book);
 app.use("/api/bookings", booking);
 app.use("/api/partners", partners);
+app.use("/api/gallery", gallery);
 
 
 
@@ -66,7 +68,8 @@ const startApp = async () => {
 		await connect(DB, {
 			useNewUrlParser: true,
 			useUnifiedTopology: true,
-			serverSelectionTimeoutMS: REQUEST_TIMEOUT,dbName:"fourgear",
+			serverSelectionTimeoutMS: REQUEST_TIMEOUT,
+			dbName: "fourgear",
 		});
 
 		success({

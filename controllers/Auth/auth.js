@@ -164,6 +164,7 @@ const login = async (req, res, next) => {
 			err.status = 403;
 			errorMsg = err.message;
 		}
+		console.log(err);
 		return res.status(500).json({
 			reason: "server",
 			message: errorMsg,
