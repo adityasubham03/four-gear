@@ -5,6 +5,11 @@ const partnerRegisterSchema = Joi.object({
   phone: Joi.number().min(10).required(),
   email: Joi.string().email(),
   address: Joi.string().required(),
+  city: Joi.string().required(),
+  map: Joi.object({
+		longitude: Joi.number().required(),
+		latitude: Joi.number().required(),
+	}).required(),
   adhaarNumber: Joi.number().required(),
   accountNumber: Joi.number().required(),
   IFSC: Joi.string().required(),

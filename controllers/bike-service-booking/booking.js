@@ -1,4 +1,5 @@
 const bike = require("../../models/bike-booking");
+const { notifier } = require("../NearestPartnerNotifier/controller");
 const {
 	bikeServiceBookingSchema,
 } = require("../Validators/service-booking/validators");
@@ -17,6 +18,8 @@ const book = async (req, res, next) => {
 		});
 
 		await newbooking.save();
+		// console.log(booking);
+		await notifier({...booking});
 		return res.status(201).json({
 			message: Register_MSG.signupSuccess,
 			success: true,

@@ -17,6 +17,20 @@ const PartnerSchema = new Schema(
 			type: String,
 			required: true,
 		},
+		city: {
+			type: String,
+			required: true,
+		},
+		map: {
+			longitude: {
+				type: Number,
+				required: true,
+			},
+			latitude: {
+				type: Number,
+				required: true,
+			},
+		},
 		adhaarNumber: {
 			type: Number,
 			required: true,

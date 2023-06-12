@@ -10,9 +10,9 @@ const router = express.Router();
 router.post("/register", register);
 router.get("/", get);
 router.get("/:id", get);
-router.get("/:id/:date", verifytoken, dayWiseTransactionHistory);
+// router.get("/:id/:date", verifytoken, dayWiseTransactionHistory);
 router.get("/:id/saveTransaction", verifytoken, saveTransaction);
-router.get("/:partner-id/sendSMS", verifytoken, partnerSendSMS);
+// router.get("/:partner-id/sendSMS", verifytoken, partnerSendSMS);
 
 
 module.exports = router;
