@@ -18,6 +18,9 @@ const BikeBookingSchema = new Schema(
 			type: String,
 			required: true,
         },
+		servicedBy : {
+			type: String,
+		},
         bike_Company: {
 			type: String,
 			required: true,
@@ -30,6 +33,10 @@ const BikeBookingSchema = new Schema(
 			type: String,
 			required: true,
 		},
+		isConfirmed: {
+			type: Boolean,
+			default: false,
+		  },
 		map: {
 			longitude: {
 				type: Number,

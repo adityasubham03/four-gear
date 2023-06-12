@@ -1,22 +1,26 @@
 const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
-const UserTransactionSchema = new Schema({
+const partnerTransactionSchema = new Schema({
   date: {
     type: Date,
     required: true,
   },
-  details: {
+  customerId: {
     type: String,
-    required: true,
+    required: true
   },
   amount: {
     type: Number,
     required: true,
   },
-  user: {
+  partnerId: {
     type: String,
     required: true,
+  },
+  mechanicName: {
+    type: String,
+    required: true
   },
   sendsms: {
     type: Boolean,
@@ -40,6 +44,6 @@ const UserTransactionSchema = new Schema({
   ],
 });
 
-const UserTransaction = mongoose.model('UserTransaction', UserTransactionSchema);
+const PartnerTransaction = mongoose.model('PartnerTransaction', partnerTransactionSchema);
 
-module.exports = UserTransaction;
+module.exports = PartnerTransaction;
