@@ -70,7 +70,42 @@ const saveTransaction = async (req, res, next) => {
       success: false,
     });
   }
+
 };
+
+const dayWiseTransactionHistory = async (req, res, next) => {
+  try {
+    const transactions = await PartnerTransaction.find({
+      partnerId: req._id,
+      date: {
+        $gte: new Date(params.desiredDate),
+        $lt: new Date(params.desiredDate) 
+      }
+    });
+
+    if (!transactions) {
+      return res.status(404).json({
+        message: Register_MSG.noDataError,
+        success: true,
+      });
+    }
+
+    return res.status(200).json({
+      transactions,
+      success: true,
+    });
+
+  } catch (error) {
+    console.error('Error filtering transactions:', error);
+    console.log(err);
+    return res.status(400).json({
+      message: Register_MSG.noDataError,
+      success: false,
+    });
+  }
+
+  
+}
 
 const getTransactions = async (req, res, next) => {
   try {
@@ -101,7 +136,33 @@ const getTransactions = async (req, res, next) => {
   }
 };
 
+const confirmBooking = async (req, res, next) => {
+
+}
+
+const userConfirmBookingSms = async (req, res, next) => {
+
+}
+
+const sendUserSms = async (req, res, next) => {
+
+}
+
+const sendPartnerSms = async (req, res, next) => {
+
+}
+
+const notify = async (req, res, next) => {
+  
+}
+
 module.exports = {
   saveTransaction,
   getTransactions,
+  dayWiseTransactionHistory,
+  confirmBooking,
+  userConfirmBookingSms,
+  sendUserSms,
+  sendPartnerSms,
+  notify,
 };
