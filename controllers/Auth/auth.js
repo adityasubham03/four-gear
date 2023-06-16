@@ -152,7 +152,7 @@ const login = async (req, res, next) => {
 				success: true,
 			});
 		} else {
-			return res.status(200).json({
+			return res.status(401).json({
 				reason: "password",
 				message: Login_MSG.wrongPassword,
 				success: false,
