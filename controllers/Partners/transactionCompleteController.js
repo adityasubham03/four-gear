@@ -139,7 +139,7 @@ const getTransactions = async (req, res, next) => {
 const confirmBooking = async (req, res, next) => {
 
 }
-
+  
 const userConfirmBookingSms = async (req, res, next) => {
 
 }
