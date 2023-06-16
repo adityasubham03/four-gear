@@ -1,4 +1,5 @@
 const bike = require("../../models/bike-booking");
+const Partners = require("../../models/partners");
 const { notifier } = require("../NearestPartnerNotifier/controller");
 const {
 	bikeServiceBookingSchema,
@@ -7,19 +8,28 @@ const {
 const Register_MSG = {
 	signupSuccess: "You are successfully signed up for the servicing.",
 	signupError: "Unable to submit the data. Please try again later!!",
+	noService: "No service centers are present in your location! Once they are available we will reach out to you!!"
 };
 
 const book = async (req, res, next) => {
 	try {
 		const booking = await bikeServiceBookingSchema.validateAsync(req.body);
-
+		const { city } = req.body;
+		const dMaps = await Partners.find({ city: city }, { map: 1, phone: 1 });
+		if (dMaps.length == 0) {
+			return res.status(404).json({
+				reason:"no-center",
+				message: Register_MSG.noService,
+				success: false,
+			});
+		}
 		const newbooking = new bike({
 			...booking,
 		});
 
 		await newbooking.save();
 		// console.log(booking);
-		await notifier({...booking});
+		await notifier({...booking},dMaps);
 		return res.status(201).json({
 			message: Register_MSG.signupSuccess,
 			success: true,
