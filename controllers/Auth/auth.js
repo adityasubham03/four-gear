@@ -19,7 +19,7 @@ const Login_MSG = {
 	wrongPassword: "Incorrect password.",
 	loginError: "Oops! Something went wrong.",
 };
-("");
+
 const Register_MSG = {
 	usernameExists: "Username is already taken.",
 	emailExists: "Email is already registered.",

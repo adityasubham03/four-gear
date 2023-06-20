@@ -4,6 +4,10 @@ const partnerRegisterSchema = Joi.object({
   name: Joi.string().min(1).required(),
   phone: Joi.number().min(10).required(),
   email: Joi.string().email(),
+  password: Joi.string()
+		.pattern(new RegExp("^[a-zA-Z0-9!@#$%^&*()_]{8,30}$"))
+		.min(8)
+		.required(),
   address: Joi.string().required(),
   city: Joi.string().required(),
   map: Joi.object({
@@ -26,6 +30,15 @@ const partnerRegisterSchema = Joi.object({
   ),
 });
 
+const partnerloginSchema = Joi.object({
+	phone: Joi.number().min(10).required(),
+	password: Joi.string()
+		.pattern(new RegExp("^[a-zA-Z0-9!@#$%^&*()_]{3,30}$"))
+		.min(8)
+		.required(),
+});
+
 module.exports = {
   partnerRegisterSchema,
+  partnerloginSchema,
 };

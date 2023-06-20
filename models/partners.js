@@ -10,6 +10,10 @@ const PartnerSchema = new Schema(
 			type: Number,
 			required: true,
 		},
+		password: {
+			type: String,
+			required: true,
+		},
 		email: {
 			type: String,
 		},
@@ -75,6 +79,10 @@ const PartnerSchema = new Schema(
 				},
 			},
 		],
+		level: {
+			type: Number,
+			required: true,
+		},
 	},
 	{ timestamps: true }
 );

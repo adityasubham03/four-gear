@@ -1,8 +1,9 @@
 const Partners = require("../../models/partners");
 var axios = require("axios");
 
-const notifier = async ({ map, city, phone,dMaps }) => {
-	// const maps = await Partners.find({ city: city }, { map: 1, phone: 1 });
+const notifier = async ({ map, city, phone }, dMaps) => {
+	console.log(dMaps);
+	const maps = await Partners.find({ city: city }, { map: 1, phone: 1 });
 	if (dMaps.length == 1) {
 		//something will happen
 	} else {

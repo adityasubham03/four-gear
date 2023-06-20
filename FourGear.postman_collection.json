@@ -80,7 +80,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDc5Yjk4YzQ5YjJhYjY3ODkyZDZmODEiLCJmbmFtZSI6IkFkaXR5YSIsImxuYW1lIjoiQ2hvdWRodXJ5IiwiZW1haWwiOiJhZGl0eWFzdWJoYW0wM0BnbWFpbC5jb20iLCJsZXZlbCI6MCwiaWF0IjoxNjg2NDA2Mjg4LCJleHAiOjE2ODY0MDYzMDh9.WX6bhHb_ymYQH52ZaG9zvZdUFn4y_wRbx98TQYwqAyA",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDc5Yjk4YzQ5YjJhYjY3ODkyZDZmODEiLCJmbmFtZSI6IkFkaXR5YSIsImxuYW1lIjoiQ2hvdWRodXJ5IiwiZW1haWwiOiJhZGl0eWFzdWJoYW0wM0BnbWFpbC5jb20iLCJsZXZlbCI6MCwiaWF0IjoxNjg3MTg0MDQxLCJleHAiOjE2ODcxODQwNjF9.-6ynjxhwxK4oZgCszcgE3aSzIn0bDlOhLaj2V-I0P6w",
 									"type": "string"
 								}
 							]
@@ -245,7 +245,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDc5Yjk4YzQ5YjJhYjY3ODkyZDZmODEiLCJmbmFtZSI6IkFkaXR5YSIsImxuYW1lIjoiQ2hvdWRodXJ5IiwiZW1haWwiOiJhZGl0eWFzdWJoYW0wM0BnbWFpbC5jb20iLCJsZXZlbCI6MCwiaWF0IjoxNjg1Njk5MDM0LCJleHAiOjE2ODU3ODU0MzR9.fhEyPrunXpnTXc-dzOy6zA0dQX03L8iwwN0rM5mSkSk",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDc5Yjk4YzQ5YjJhYjY3ODkyZDZmODEiLCJmbmFtZSI6IkFkaXR5YSIsImxuYW1lIjoiQ2hvdWRodXJ5IiwiZW1haWwiOiJhZGl0eWFzdWJoYW0wM0BnbWFpbC5jb20iLCJsZXZlbCI6MCwiaWF0IjoxNjg3MTg0MzQ3LCJleHAiOjE2ODcxODQzNjd9.wVEH6V_4ieWjcQxHcNITqle4VD7AKx6UAAw48x1fNeY",
 									"type": "string"
 								}
 							]
@@ -280,7 +280,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n  \"name\": \"Partner Name\",\n  \"phone\": 1234567890,\n  \"email\": \"partner@example.com\",\n  \"address\": \"Partner Address\",\n  \"city\": \"Bhubaneswar\",\n  \"map\":{\n        \"longitude\":34.34667797,\n        \"latitude\":68.23543676\n    },\n  \"adhaarNumber\": 123456789012,\n  \"accountNumber\": 9876543210,\n  \"IFSC\": \"ABCD1234567\",\n  \"ownerPic\": \"owner.jpg\",\n  \"shopPic\": \"shop.jpg\",\n  \"noMechanics\": 2,\n  \"mechanicDetails\": [\n    {\n      \"name\": \"John Doe\",\n      \"contact\": 9876543210,\n      \"address\": \"Mechanic 1 Address\",\n      \"photo\": \"mechanic1.jpg\"\n    },\n    {\n      \"name\": \"Jane Smith\",\n      \"contact\": 1234567890,\n      \"address\": \"Mechanic 2 Address\",\n      \"photo\": \"mechanic2.jpg\"\n    }\n  ]\n}\n",
+							"raw": "{\n  \"name\": \"Partner Name\",\n  \"phone\": 1234567890,\n  \"email\": \"partner@example.com\",\n  \"password\":\"27Adich@\",\n  \"address\": \"Partner Address\",\n  \"city\": \"Bhubaneswar\",\n  \"map\":{\n        \"longitude\":34.34667797,\n        \"latitude\":68.23543676\n    },\n  \"adhaarNumber\": 123456789012,\n  \"accountNumber\": 9876543210,\n  \"IFSC\": \"ABCD1234567\",\n  \"ownerPic\": \"owner.jpg\",\n  \"shopPic\": \"shop.jpg\",\n  \"noMechanics\": 2,\n  \"mechanicDetails\": [\n    {\n      \"name\": \"John Doe\",\n      \"contact\": 9876543210,\n      \"address\": \"Mechanic 1 Address\",\n      \"photo\": \"mechanic1.jpg\"\n    },\n    {\n      \"name\": \"Jane Smith\",\n      \"contact\": 1234567890,\n      \"address\": \"Mechanic 2 Address\",\n      \"photo\": \"mechanic2.jpg\"\n    }\n  ]\n}\n",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -304,6 +304,36 @@
 					"response": []
 				},
 				{
+					"name": "Partner Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"phone\":1234567890,\r\n    \"password\":\"27Adich@\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/partners/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"partners",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "Get Partners",
 					"request": {
 						"method": "GET",
@@ -319,6 +349,68 @@
 								"api",
 								"partners",
 								"1234"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Partner",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDkxZWJlNjJmYTc4OTZiMGU5NDgyNmQiLCJmbmFtZSI6IlBhcnRuZXIgTmFtZSIsInBob25lIjoxMjM0NTY3ODkwLCJsZXZlbCI6MiwiaWF0IjoxNjg3Mjg2Mjg5LCJleHAiOjE2ODcyODYzMDl9.5xUnjY0FSC93iaI4MSBtdJzsU2wdKwdvrOfG58pz6eI",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/api/partners/user",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"partners",
+								"user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Partner Token Refresh",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDkxZWJlNjJmYTc4OTZiMGU5NDgyNmQiLCJmbmFtZSI6IlBhcnRuZXIgTmFtZSIsInBob25lIjoxMjM0NTY3ODkwLCJsZXZlbCI6MiwiaWF0IjoxNjg3Mjg1MTg4fQ.g9NOk_waouZVSBe9f4cA_LBRNu8jpmzt8GCN8-EyChA",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/api/partners/refresh",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"partners",
+								"refresh"
 							]
 						}
 					},
