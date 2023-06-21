@@ -8,7 +8,8 @@ const {
 const Register_MSG = {
 	signupSuccess: "You are successfully signed up for the servicing.",
 	signupError: "Unable to submit the data. Please try again later!!",
-	noService: "No service centers are present in your location! Once they are available we will reach out to you!!"
+	noService:
+		"No service centers are present in your location! Once they are available we will reach out to you!!",
 };
 
 const book = async (req, res, next) => {
@@ -16,21 +17,26 @@ const book = async (req, res, next) => {
 		const booking = await bikeServiceBookingSchema.validateAsync(req.body);
 		const { city } = req.body;
 		const dMaps = await Partners.find({ city: city }, { map: 1, phone: 1 });
-		console.log(dMaps);
+		// console.log(dMaps);
 		if (dMaps.length == 0) {
 			return res.status(404).json({
-				reason:"no-center",
+				reason: "no-center",
 				message: Register_MSG.noService,
 				success: false,
 			});
 		}
+
+		const distances = await notifier({ ...booking }, dMaps);
+		// console.log(distances);
+			
 		const newbooking = new bike({
 			...booking,
+			distances,
 		});
 
 		await newbooking.save();
-		// console.log(booking);
-		await notifier({...booking},dMaps);
+
+
 		return res.status(201).json({
 			message: Register_MSG.signupSuccess,
 			success: true,
@@ -54,9 +60,11 @@ const viewBooking = async (req, res, next) => {
 	try {
 		bookings = await bike.find();
 		if (bookings[0]) {
-			return res.status(200).json({ data:{...bookings}, success: "true" });
+			return res.status(200).json({ data: { ...bookings }, success: "true" });
 		} else {
-			return res.status(404).json({success:"false",message:"No bookings found!!"});
+			return res
+				.status(404)
+				.json({ success: "false", message: "No bookings found!!" });
 		}
 	} catch (e) {
 		return res.status(e.status).json({

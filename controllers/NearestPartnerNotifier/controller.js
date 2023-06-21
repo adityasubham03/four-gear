@@ -2,68 +2,46 @@ const Partners = require("../../models/partners");
 var axios = require("axios");
 
 const notifier = async ({ map, city, phone }, dMaps) => {
-	console.log(dMaps);
-	const maps = await Partners.find({ city: city }, { map: 1, phone: 1 });
-	if (dMaps.length == 1) {
-		//something will happen
-	} else {
-		const destinations = dMaps.map((item) => {
-			const { phone } = item;
-			const { longitude, latitude } = item.map; // Include _id property from map
-			return { phone: phone, lat: latitude, lng: longitude }; // Add _id property to destination
-		});
+	const apiKey = "AIzaSyCWeOpv-NQZ3O4CzWTuhXTSsTyNMC9dwTU"; // Replace with your Google Maps API key
+	const baseUrl = "https://maps.googleapis.com/maps/api/distancematrix/json";
+	// console.log(dMaps);
 
-		const origins = `${map.latitude},${map.longitude}`;
-		const destinationsString = destinations
-			.map((dest) => `${dest.lat},${dest.lng}`)
-			.join("|");
-		const apiKey = "AIzaSyCWeOpv-NQZ3O4CzWTuhXTSsTyNMC9dwTU";
-		const url = `https://maps.googleapis.com/maps/api/distancematrix/json?origins=${origins}&destinations=${destinationsString}&key=${apiKey}&units=imperial`;
+	const distances = [];
 
-		var config = {
-			method: "get",
-			url: url,
-			headers: {},
+	const origins = `${map.latitude},${map.longitude}`;
+	const destinationsString = dMaps
+		.map((dest) => `${dest.map.latitude},${dest.map.longitude}`)
+		.join("|");
+
+	// console.log(destinationsString);
+	const responses = await axios.get(baseUrl, {
+		params: {
+			key: apiKey,
+			origins: origins,
+			destinations: destinationsString,
+		},
+	});
+
+	const response = responses.data;
+
+	for (let i = 0; i < response.rows[0].elements.length; i++) {
+		const destination = dMaps[i];
+		const phone = destination.phone;
+		const distanceInMeters = response.rows[0].elements[i].distance.value;
+
+		// Create an object with phone and distance properties
+		const distanceObj = {
+			phone: phone,
+			distance: distanceInMeters,
 		};
 
-		let responses;
-
-		try {
-			const response = await axios(config);
-			responses = response.data;
-		} catch (error) {
-			console.log(error);
-		}
-
-		let distances = [];
-
-		if (responses && responses.rows && responses.rows.length > 0) {
-			const destinationAddresses = responses.destination_addresses;
-			const distanceElements = responses.rows[0].elements;
-
-			distances = destinationAddresses.reduce((acc, address, index) => {
-				const originalDestination = destinations[index];
-				const destination = {
-					phone: originalDestination.phone, // Include _id property
-					lat: originalDestination.lat,
-					lng: originalDestination.lng,
-				};
-				const distance = parseInt(distanceElements[index].distance.value);
-				acc.push({ destination, distance });
-				return acc;
-			}, []);
-		}
-
-		distances.sort((a, b) => a.distance - b.distance);
-		console.log(distances);
-		console.log(
-			"Shortest Distance Destination ID: " + distances[0].destination.phone
-		); // Access the _id property
-		console.log(
-			"Largest Distance Destination ID: " +
-				distances[distances.length - 1].destination.phone
-		); // Access the _id property
+		// Push the object to the distances array
+		distances.push(distanceObj);
 	}
+	distances.sort((a, b) => a.distance - b.distance);
+	// console.log(distances);
+
+	return distances;
 };
 
 module.exports = {
