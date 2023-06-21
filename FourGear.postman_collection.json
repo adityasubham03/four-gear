@@ -209,7 +209,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"name\":\"Aditya Choudhury\",\n    \"phone\":9668111905,\n    \"email\":\"adityasubham03@gmail.com\",\n    \"city\":\"Bhubaneswar\",\n    \"bike_Company\":\"Hero\",\n    \"bike_Model\":\"Xtreme 2013\",\n    \"address\":\"ganga nagar\",\n    \"map\":{\n        \"longitude\":85.8174952,\n        \"latitude\":20.2633419\n    }\n}",
+							"raw": "{\n    \"name\":\"Aditya Choudhury\",\n    \"phone\":9668111905,\n    \"email\":\"adityasubham03@gmail.com\",\n    \"city\":\"Bhubaneswar\",\n    \"bike_Company\":\"Hero\",\n    \"bike_Model\":\"Xtreme 2013\",\n    \"address\":\"ganga nagar\",\n    \"map\":{\n        \"longitude\":85.8186577,\n        \"latitude\":20.2642714\n    }\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -280,7 +280,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n  \"name\": \"Partner Name\",\n  \"phone\": 1234567890,\n  \"email\": \"partner@example.com\",\n  \"password\":\"27Adich@\",\n  \"address\": \"Partner Address\",\n  \"city\": \"Bhubaneswar\",\n  \"map\":{\n        \"longitude\":34.34667797,\n        \"latitude\":68.23543676\n    },\n  \"adhaarNumber\": 123456789012,\n  \"accountNumber\": 9876543210,\n  \"IFSC\": \"ABCD1234567\",\n  \"ownerPic\": \"owner.jpg\",\n  \"shopPic\": \"shop.jpg\",\n  \"noMechanics\": 2,\n  \"mechanicDetails\": [\n    {\n      \"name\": \"John Doe\",\n      \"contact\": 9876543210,\n      \"address\": \"Mechanic 1 Address\",\n      \"photo\": \"mechanic1.jpg\"\n    },\n    {\n      \"name\": \"Jane Smith\",\n      \"contact\": 1234567890,\n      \"address\": \"Mechanic 2 Address\",\n      \"photo\": \"mechanic2.jpg\"\n    }\n  ]\n}\n",
+							"raw": "{\n  \"name\": \"Partner Name\",\n  \"phone\": 1234567891,\n  \"email\": \"partner@example.com\",\n  \"password\":\"27Adich@\",\n  \"address\": \"Partner Address\",\n  \"city\": \"Bhubaneswar\",\n  \"map\":{\n        \"longitude\":85.8179029,\n        \"latitude\":20.2692706\n    },\n  \"adhaarNumber\": 123456789012,\n  \"accountNumber\": 9876543210,\n  \"IFSC\": \"ABCD1234567\",\n  \"ownerPic\": \"owner.jpg\",\n  \"shopPic\": \"shop.jpg\",\n  \"noMechanics\": 2,\n  \"mechanicDetails\": [\n    {\n      \"name\": \"John Doe\",\n      \"contact\": 9876543210,\n      \"address\": \"Mechanic 1 Address\",\n      \"photo\": \"mechanic1.jpg\"\n    },\n    {\n      \"name\": \"Jane Smith\",\n      \"contact\": 1234567890,\n      \"address\": \"Mechanic 2 Address\",\n      \"photo\": \"mechanic2.jpg\"\n    }\n  ]\n}\n",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -362,7 +362,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDkxZWJlNjJmYTc4OTZiMGU5NDgyNmQiLCJmbmFtZSI6IlBhcnRuZXIgTmFtZSIsInBob25lIjoxMjM0NTY3ODkwLCJsZXZlbCI6MiwiaWF0IjoxNjg3Mjg2Mjg5LCJleHAiOjE2ODcyODYzMDl9.5xUnjY0FSC93iaI4MSBtdJzsU2wdKwdvrOfG58pz6eI",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDkxZWJlNjJmYTc4OTZiMGU5NDgyNmQiLCJwaG9uZSI6MTIzNDU2Nzg5MCwibGV2ZWwiOjIsImlhdCI6MTY4NzI4NjY3MywiZXhwIjoxNjg3Mjg2NjkzfQ.XDYTps_0LBMJR3uCr5juOj4Or4C2zxII23RcHAHsyJI",
 									"type": "string"
 								}
 							]
@@ -393,7 +393,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDkxZWJlNjJmYTc4OTZiMGU5NDgyNmQiLCJmbmFtZSI6IlBhcnRuZXIgTmFtZSIsInBob25lIjoxMjM0NTY3ODkwLCJsZXZlbCI6MiwiaWF0IjoxNjg3Mjg1MTg4fQ.g9NOk_waouZVSBe9f4cA_LBRNu8jpmzt8GCN8-EyChA",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDkxZWJlNjJmYTc4OTZiMGU5NDgyNmQiLCJmbmFtZSI6IlBhcnRuZXIgTmFtZSIsInBob25lIjoxMjM0NTY3ODkwLCJsZXZlbCI6MiwiaWF0IjoxNjg3Mjg2Mjg5fQ.oQZr0mkybPMv7Ed44-9-Afb_E02XF4fNAZXGe7En0iY",
 									"type": "string"
 								}
 							]
