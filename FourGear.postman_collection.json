@@ -280,7 +280,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n  \"name\": \"Partner Name\",\n  \"phone\": 1234567891,\n  \"email\": \"partner@example.com\",\n  \"password\":\"27Adich@\",\n  \"address\": \"Partner Address\",\n  \"city\": \"Bhubaneswar\",\n  \"map\":{\n        \"longitude\":85.8179029,\n        \"latitude\":20.2692706\n    },\n  \"adhaarNumber\": 123456789012,\n  \"accountNumber\": 9876543210,\n  \"IFSC\": \"ABCD1234567\",\n  \"ownerPic\": \"owner.jpg\",\n  \"shopPic\": \"shop.jpg\",\n  \"noMechanics\": 2,\n  \"mechanicDetails\": [\n    {\n      \"name\": \"John Doe\",\n      \"contact\": 9876543210,\n      \"address\": \"Mechanic 1 Address\",\n      \"photo\": \"mechanic1.jpg\"\n    },\n    {\n      \"name\": \"Jane Smith\",\n      \"contact\": 1234567890,\n      \"address\": \"Mechanic 2 Address\",\n      \"photo\": \"mechanic2.jpg\"\n    }\n  ]\n}\n",
+							"raw": "{\n  \"name\": \"Partner Name\",\n  \"phone\": 1234567890,\n  \"email\": \"partner@example.com\",\n  \"password\":\"27Adich@\",\n  \"shopName\":\"Partner 0 Servicings\",\n  \"address\": \"Partner Address\",\n  \"city\": \"Bhubaneswar\",\n  \"map\":{\n        \"longitude\":85.8179029,\n        \"latitude\":20.2692706\n    },\n  \"adhaarNumber\": 123456789012,\n  \"accountNumber\": 9876543210,\n  \"IFSC\": \"ABCD1234567\",\n  \"ownerPic\": \"owner.jpg\",\n  \"shopPic\": \"shop.jpg\",\n  \"noMechanics\": 2,\n  \"mechanicDetails\": [\n    {\n      \"name\": \"John Doe\",\n      \"contact\": 9876543210,\n      \"address\": \"Mechanic 1 Address\",\n      \"photo\": \"mechanic1.jpg\"\n    },\n    {\n      \"name\": \"Jane Smith\",\n      \"contact\": 1234567890,\n      \"address\": \"Mechanic 2 Address\",\n      \"photo\": \"mechanic2.jpg\"\n    }\n  ]\n}\n",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -339,7 +339,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:5000/api/partners/1234",
+							"raw": "http://localhost:5000/api/partners/",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -348,7 +348,7 @@
 							"path": [
 								"api",
 								"partners",
-								"1234"
+								""
 							]
 						}
 					},
@@ -411,6 +411,117 @@
 								"api",
 								"partners",
 								"refresh"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Partner Services",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDk0NTIxOWVhNTdiZDI5OWEyNjY4ZWMiLCJmbmFtZSI6IlBhcnRuZXIgTmFtZSIsInBob25lIjoxMjM0NTY3ODkwLCJsZXZlbCI6MiwiaWF0IjoxNjg3NDU5MTU0LCJleHAiOjE2ODc0NTkxNzR9.q72OD4NkdcmQik3hF8CcU7cSBwVsYfXIyWlshBBDIuA",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/api/partners/service",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"partners",
+								"service"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Service Confirm",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDk0NTIxOWVhNTdiZDI5OWEyNjY4ZWMiLCJmbmFtZSI6IlBhcnRuZXIgTmFtZSIsInBob25lIjoxMjM0NTY3ODkwLCJsZXZlbCI6MiwiaWF0IjoxNjg3NDU4NzcwLCJleHAiOjE2ODc0NTg3OTB9.2s8c8rSSs2cO0Rr9IOXdU3VXAehtapBj4UCv4oeROZ8",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"_id\": \"64944ff39e52dc73c8f62ab8\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/partners/confirm",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"partners",
+								"confirm"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Service Decline",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDk0NTIxOWVhNTdiZDI5OWEyNjY4ZWMiLCJmbmFtZSI6IlBhcnRuZXIgTmFtZSIsInBob25lIjoxMjM0NTY3ODkwLCJsZXZlbCI6MiwiaWF0IjoxNjg3NDU5MDE1LCJleHAiOjE2ODc0NTkwMzV9.dxnGAJDKBeHj_rQKV_fWa6G7dsVGQRUqxNagL85ViJo",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"_id\":\"649458f5b7de496688bb5dd7\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/partners/decline",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"partners",
+								"decline"
 							]
 						}
 					},
