@@ -17,6 +17,10 @@ const PartnerSchema = new Schema(
 		email: {
 			type: String,
 		},
+		shopName: {
+			type: String,
+			required: true,
+		},
 		address: {
 			type: String,
 			required: true,

@@ -62,6 +62,26 @@ const BikeBookingSchema = new Schema({
 		type: Number,
 		default: 0,
 	},
+	isAssigned: {
+		type: Boolean,
+		default: false,
+	},
+	assignedTo: {
+		type: Number,
+		default: null,
+	},
+	partnerName: {
+		type: String,
+		required: true,
+	},
+	isCompleted: {
+		type: Boolean,
+		default: false,
+	},
+	isAbandoned: {
+		type: Boolean,
+		default: false,
+	},
 });
 
 module.exports = model("BikeBooking", BikeBookingSchema);

@@ -7,7 +7,8 @@ const partnerRegisterSchema = Joi.object({
   password: Joi.string()
 		.pattern(new RegExp("^[a-zA-Z0-9!@#$%^&*()_]{8,30}$"))
 		.min(8)
-		.required(),
+    .required(),
+  shopName: Joi.string().required(),
   address: Joi.string().required(),
   city: Joi.string().required(),
   map: Joi.object({

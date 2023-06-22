@@ -1,5 +1,6 @@
 const partnerRefreshToken = require("../../models/partnerRefreshToken");
 const Partners = require("../../models/partners");
+const bookings = require("../../models/bike-booking");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const { JWT_SECRET, JWT_REFRESH_TOKEN_SECRET } = require("../../config/db");
@@ -8,6 +9,7 @@ const {
 	partnerRegisterSchema,
 	partnerloginSchema,
 } = require("../Validators/Partners/validators");
+const { json } = require("express");
 
 const Register_MSG = {
 	signupSuccess: "You are successfully signed up for the partners programme.",
@@ -114,10 +116,11 @@ const login = async (req, res, next) => {
 			}
 
 			if (refreshTokenColl) {
-				partnerRefreshToken.updateOne(
-					{ phone: user.phone },
-					{ $push: { refreshToken: refreshToken } }
-				)
+				partnerRefreshToken
+					.updateOne(
+						{ phone: user.phone },
+						{ $push: { refreshToken: refreshToken } }
+					)
 					.then((result) => {
 						console.log("Successfully updated the refresh token");
 					})
@@ -171,10 +174,10 @@ const login = async (req, res, next) => {
 };
 
 const verifytoken = (req, res, next) => {
-	console.log('Entered');
+	console.log("Entered");
 	if (req.headers["authorization"]) {
-        const cookies = req.headers["authorization"];
-        // console.log(cookies);
+		const cookies = req.headers["authorization"];
+		// console.log(cookies);
 		try {
 			token = cookies.split(" ")[1];
 		} catch (err) {
@@ -216,7 +219,7 @@ const verifytoken = (req, res, next) => {
 
 const verifyRefreshToken = async (req, res, next) => {
 	if (req.headers["authorization"]) {
-        const cookies = req.headers["authorization"];
+		const cookies = req.headers["authorization"];
 		try {
 			token = cookies.split(" ")[1];
 		} catch (err) {
@@ -256,44 +259,44 @@ const verifyRefreshToken = async (req, res, next) => {
 	});
 };
 
-const get = async (req, res, next) => {
-	let partners;
-	const id = req.params.id;
-	try {
-		if (id) {
-			partners = await Partners.findById(id);
-		} else {
-			partners = await Partners.find();
-		}
-	} catch (err) {
-		console.log(err);
-		return res.status(400).json({
-			message: Register_MSG.noDataError,
-			success: false,
-		});
-	}
-	if (!partners) {
-		return res.status(404).json({
-			message: Register_MSG.noDataError,
-			success: true,
-		});
-	}
-	return res.status(200).json({
-		partners,
-		success: true,
-	});
-};
+// const get = async (req, res, next) => {
+// 	let partners;
+// 	const id = req.params.id;
+// 	try {
+// 		if (id) {
+// 			partners = await Partners.findById(id);
+// 		} else {
+// 			partners = await Partners.find();
+// 		}
+// 	} catch (err) {
+// 		console.log(err);
+// 		return res.status(400).json({
+// 			message: Register_MSG.noDataError,
+// 			success: false,
+// 		});
+// 	}
+// 	if (!partners) {
+// 		return res.status(404).json({
+// 			message: Register_MSG.noDataError,
+// 			success: true,
+// 		});
+// 	}
+// 	return res.status(200).json({
+// 		partners,
+// 		success: true,
+// 	});
+// };
 
 const getuser = async (req, res, next) => {
 	let user;
-    if (req._id) {
+	if (req._id) {
 		const userid = req._id;
 		try {
 			user = await Partners.findById(userid, "-password");
 		} catch (err) {
 			return new Error(err);
 		}
-    } else if (req.phone) {
+	} else if (req.phone) {
 		const phone = req.phone;
 		try {
 			user = await Partners.findOne({ phone: phone });
@@ -304,16 +307,16 @@ const getuser = async (req, res, next) => {
 	if (!user) {
 		return res.status(404).json({ message: "User not found!!" });
 	}
-    let r;
-    if (req.token) {
-        let token = req.token
-        r = {
-            token,
-            user
-        }
-    } else {
-        r = user;
-    }
+	let r;
+	if (req.token) {
+		let token = req.token;
+		r = {
+			token,
+			user,
+		};
+	} else {
+		r = user;
+	}
 	return res.status(200).json(r);
 };
 
@@ -324,7 +327,7 @@ const refresh = async (req, res, next) => {
 	refreshTokenColl = await partnerRefreshToken.findOne({ phone: phone });
 	console.log(refreshTokenColl);
 
-	if(!refreshTokenColl){
+	if (!refreshTokenColl) {
 		return res.status(400).json({
 			reason: "unauthorized",
 			message: "Invalid token",
@@ -347,8 +350,37 @@ const refresh = async (req, res, next) => {
 			success: true,
 		});
 	}
+};
 
-
+const service = async (req, res, next) => {
+	try {
+		const phone = req.phone;
+		console.log(phone);
+		const services = await bookings.find({
+			assignedTo: phone,
+			isAbandoned: false,
+		});
+		console.log(services);
+		if (services[0]) {
+			return res.status(200).json({
+				data: { ...services },
+				success: true,
+			});
+		} else {
+			return res.status(404).json({
+				data: "No data found",
+				success: true,
+			});
+		}
+	} catch (err) {
+		console.log(err);
+		return res.status(500).json({
+			reason: "server",
+			message:
+				"An error was encountered on the server! Please try again later.",
+			success: false,
+		});
+	}
 };
 
 module.exports = {
@@ -356,7 +388,7 @@ module.exports = {
 	login,
 	verifytoken,
 	verifyRefreshToken,
-	get,
 	getuser,
 	refresh,
+	service,
 };

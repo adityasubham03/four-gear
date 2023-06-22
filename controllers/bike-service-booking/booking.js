@@ -28,10 +28,14 @@ const book = async (req, res, next) => {
 
 		const distances = await notifier({ ...booking }, dMaps);
 		// console.log(distances);
+		const assigned = await Partners.findOne({ phone: distances[0].phone });
+		// console.log(assigned);
 			
 		const newbooking = new bike({
 			...booking,
 			distances,
+			assignedTo: distances[0].phone,
+			partnerName: assigned.name,
 		});
 
 		await newbooking.save();
@@ -74,7 +78,48 @@ const viewBooking = async (req, res, next) => {
 	}
 };
 
+const viewBookingUser = async (req, res, next) => {
+	let email = req.email;
+	let bookings;
+	try {
+		bookings = await bike.find({email:email});
+		if (bookings[0]) {
+			return res.status(200).json({ data: { ...bookings }, success: "true" });
+		} else {
+			return res
+				.status(404)
+				.json({ success: "false", message: "No bookings found!!" });
+		}
+	} catch (e) {
+		return res.status(e.status).json({
+			message: "Unexpected Error",
+			success: false,
+		});
+	}
+};
+
+const viewBookingPartner = async (req, res, next) => {
+	let partnerId = req.phone;
+	let bookings;
+	try {
+		bookings = await bike.find();
+		if (bookings[0]) {
+			return res.status(200).json({ data: { ...bookings }, success: "true" });
+		} else {
+			return res
+				.status(404)
+				.json({ success: "false", message: "No bookings found!!" });
+		}
+	} catch (e) {
+		return res.status(e.status).json({
+			message: "Unexpected Error",
+			success: false,
+		});
+	}
+};
+
 module.exports = {
 	book,
 	viewBooking,
+	viewBookingUser,
 };
