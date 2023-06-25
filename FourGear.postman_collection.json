@@ -80,7 +80,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDc5Yjk4YzQ5YjJhYjY3ODkyZDZmODEiLCJmbmFtZSI6IkFkaXR5YSIsImxuYW1lIjoiQ2hvdWRodXJ5IiwiZW1haWwiOiJhZGl0eWFzdWJoYW0wM0BnbWFpbC5jb20iLCJsZXZlbCI6MCwiaWF0IjoxNjg3MTg0MDQxLCJleHAiOjE2ODcxODQwNjF9.-6ynjxhwxK4oZgCszcgE3aSzIn0bDlOhLaj2V-I0P6w",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDc5Yjk4YzQ5YjJhYjY3ODkyZDZmODEiLCJmbmFtZSI6IkFkaXR5YSIsImxuYW1lIjoiQ2hvdWRodXJ5IiwiZW1haWwiOiJhZGl0eWFzdWJoYW0wM0BnbWFpbC5jb20iLCJsZXZlbCI6MCwidmVyaWZpZWQiOnRydWUsImlhdCI6MTY4NzcxOTkyNiwiZXhwIjoxNjg3NzE5OTQ2fQ.9t7GQdad4mFyAF7gJVEsFjazMgSIvT5HjWAX3h5fACU",
 									"type": "string"
 								}
 							]
@@ -111,7 +111,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDc5Yjk4YzQ5YjJhYjY3ODkyZDZmODEiLCJmbmFtZSI6IkFkaXR5YSIsImxuYW1lIjoiQ2hvdWRodXJ5IiwiZW1haWwiOiJhZGl0eWFzdWJoYW0wM0BnbWFpbC5jb20iLCJsZXZlbCI6MCwiaWF0IjoxNjg2NDA2MDcxfQ.NP9c68bngbwxf0Y2wxYrxoMuN_3lwfVsxwPN4WjaWpM",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDc5Yjk4YzQ5YjJhYjY3ODkyZDZmODEiLCJmbmFtZSI6IkFkaXR5YSIsImxuYW1lIjoiQ2hvdWRodXJ5IiwiZW1haWwiOiJhZGl0eWFzdWJoYW0wM0BnbWFpbC5jb20iLCJsZXZlbCI6MCwidmVyaWZpZWQiOnRydWUsImlhdCI6MTY4NzcxOTYyNX0.Obi_VEerf1vUhMzcfbOEtC1p78n8guLTGuVZ80y4jKY",
 									"type": "string"
 								}
 							]
@@ -192,6 +192,77 @@
 								"api",
 								"auth",
 								"logout"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Generate OTP",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDc5Yjk4YzQ5YjJhYjY3ODkyZDZmODEiLCJmbmFtZSI6IkFkaXR5YSIsImxuYW1lIjoiQ2hvdWRodXJ5IiwiZW1haWwiOiJhZGl0eWFzdWJoYW0wM0BnbWFpbC5jb20iLCJsZXZlbCI6MCwidmVyaWZpZWQiOmZhbHNlLCJpYXQiOjE2ODc3MTkxNDAsImV4cCI6MTY4NzcxOTE2MH0.tAzq-1D82v1z3UWTKdZSp8u_u9CSRAxZKo8PBJBMINs",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/api/auth/generate",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"auth",
+								"generate"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Account Verification",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDc5Yjk4YzQ5YjJhYjY3ODkyZDZmODEiLCJmbmFtZSI6IkFkaXR5YSIsImxuYW1lIjoiQ2hvdWRodXJ5IiwiZW1haWwiOiJhZGl0eWFzdWJoYW0wM0BnbWFpbC5jb20iLCJsZXZlbCI6MCwidmVyaWZpZWQiOmZhbHNlLCJpYXQiOjE2ODc3MTkyODcsImV4cCI6MTY4NzcxOTMwN30.vT9arEZ6QpxBiZT80gc6yEz5CYrg4plDgBjNC2G6884",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"otp\":\"535TV5\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/auth/verify",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"auth",
+								"verify"
 							]
 						}
 					},
@@ -615,6 +686,26 @@
 					"response": []
 				}
 			]
+		},
+		{
+			"name": "DB Update",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/db/update",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"db",
+						"update"
+					]
+				}
+			},
+			"response": []
 		}
 	]
 }

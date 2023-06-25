@@ -38,9 +38,35 @@ const isadmin = (req, res, next) => {
 	}
 };
 
+const verification = (req, res, next) => {
+	if (req.verified) {
+		return res.status(200).json({
+			reason: "verified",
+			message: "user already verified",
+			success: false,
+		});
+	} else {
+		next();
+	}
+};
+
+const isOTP = (req, res, next) => {
+	if (req.body.otp) {
+		next();
+	} else {
+		return res.status(404).json({
+			reason: "no-OTP",
+			message: "no OTP was provided! Enter otp and try again!",
+			success: false,
+		});
+	}
+};
+
 module.exports = {
 	validateEmail,
 	loginSchema,
 	signupSchema,
 	isadmin,
+	verification,
+	isOTP,
 };

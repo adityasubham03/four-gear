@@ -9,6 +9,8 @@ const partners = require("./routes/partner-routes");
 const booking = require("./routes/view-bookings")
 const gallery = require("./routes/gallery-routes");
 
+const User = require('./models/Users');
+
 const app = express();
 
 app.use(cors());
@@ -48,6 +50,14 @@ app.use("/api/book", book);
 app.use("/api/bookings", booking);
 app.use("/api/partners", partners);
 app.use("/api/gallery", gallery);
+	
+app.use("/db/update", async (req, res) => {
+	await User.updateMany({}, { verified: false });
+	return res.status(200).json({
+		message: "Records updated sucessfully",
+		success: true,
+	});
+})
 
 
 
