@@ -24,7 +24,7 @@ const partnerRegisterSchema = Joi.object({
   mechanicDetails: Joi.array().items(
     Joi.object({
       name: Joi.string().min(1).required(),
-      contact: Joi.number().min(10).required(),
+      contactNumber: Joi.number().min(10).required(),
       address: Joi.string().required(),
       aadharNumber: Joi.string().required(),
     })
