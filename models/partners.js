@@ -39,7 +39,7 @@ const PartnerSchema = new Schema(
 				required: true,
 			},
 		},
-		adhaarNumber: {
+		aadharNumber: {
 			type: Number,
 			required: true,
 		},
@@ -47,7 +47,7 @@ const PartnerSchema = new Schema(
 			type: Number,
 			required: true,
 		},
-		IFSC: {
+		ifscCode: {
 			type: String,
 			required: true,
 		},
@@ -59,7 +59,7 @@ const PartnerSchema = new Schema(
 			type: String,
 			required: true,
 		},
-		noMechanics: {
+		numberofMechanics: {
 			type: Number,
 			required: true,
 		},
@@ -69,7 +69,7 @@ const PartnerSchema = new Schema(
 					type: String,
 					required: true,
 				},
-				contact: {
+				contactNumber: {
 					type: Number,
 					required: true,
 				},
@@ -77,7 +77,7 @@ const PartnerSchema = new Schema(
 					type: String,
 					required: true,
 				},
-				photo: {
+				aadharNumber: {
 					type: String,
 					required: true,
 				},
