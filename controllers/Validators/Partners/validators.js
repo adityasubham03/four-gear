@@ -15,18 +15,18 @@ const partnerRegisterSchema = Joi.object({
 		longitude: Joi.number().required(),
 		latitude: Joi.number().required(),
 	}).required(),
-  adhaarNumber: Joi.number().required(),
+  aadharNumber: Joi.number().required(),
   accountNumber: Joi.number().required(),
-  IFSC: Joi.string().required(),
+  ifscCode: Joi.string().required(),
   ownerPic: Joi.string().required(),
   shopPic: Joi.string().required(),
-  noMechanics: Joi.number().required(),
+  numberofMechanics: Joi.number().required(),
   mechanicDetails: Joi.array().items(
     Joi.object({
       name: Joi.string().min(1).required(),
       contact: Joi.number().min(10).required(),
       address: Joi.string().required(),
-      photo: Joi.string().required(),
+      aadharNumber: Joi.string().required(),
     })
   ),
 });
