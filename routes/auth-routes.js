@@ -23,6 +23,7 @@ router.post("/login", login);
 router.post("/register", register);
 router.post("/generate", verifytoken, generate);
 router.post("/verify", verifytoken, verification, isOTP, verify);
+router.post("/register/verify", isOTP, verify);
 router.get("/user", verifytoken, getuser);
 router.get("/refresh", verifyRefreshToken, refresh);
 router.get("/user/:email/", verifytoken, isadmin, getuseradmin);

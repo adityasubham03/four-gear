@@ -29,37 +29,50 @@ const Register_MSG = {
 	signupError: "Unable to create your account.",
 };
 
-const otpgen = (length) => {
-	const alphabets = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+// const otpgen = (length) => {
+// 	const alphabets = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+// 	const digits = "0123456789";
+// 	let otp = "";
+
+// 	let alphabetCount = 0;
+// 	let hasMinimumOneAlphabet = false;
+
+// 	for (let i = 0; i < length; i++) {
+// 		let randomIndex;
+
+// 		if (
+// 			(alphabetCount < 2 && Math.random() < 0.5) ||
+// 			(i === length - 1 && !hasMinimumOneAlphabet)
+// 		) {
+// 			// If the current count of alphabets is less than 2 and random condition is met,
+// 			// or if it is the last character and there has not been minimum one alphabet yet,
+// 			// ensure the character is an alphabet.
+// 			randomIndex = Math.floor(Math.random() * alphabets.length);
+// 			otp += alphabets[randomIndex];
+// 			alphabetCount++;
+// 			hasMinimumOneAlphabet = true;
+// 		} else {
+// 			// Otherwise, add a random digit.
+// 			randomIndex = Math.floor(Math.random() * digits.length);
+// 			otp += digits[randomIndex];
+// 		}
+// 	}
+
+// 	return otp;
+// };
+
+const otpgen = (n) => {
 	const digits = "0123456789";
 	let otp = "";
-
-	let alphabetCount = 0;
-	let hasMinimumOneAlphabet = false;
-
-	for (let i = 0; i < length; i++) {
-		let randomIndex;
-
-		if (
-			(alphabetCount < 2 && Math.random() < 0.5) ||
-			(i === length - 1 && !hasMinimumOneAlphabet)
-		) {
-			// If the current count of alphabets is less than 2 and random condition is met,
-			// or if it is the last character and there has not been minimum one alphabet yet,
-			// ensure the character is an alphabet.
-			randomIndex = Math.floor(Math.random() * alphabets.length);
-			otp += alphabets[randomIndex];
-			alphabetCount++;
-			hasMinimumOneAlphabet = true;
-		} else {
-			// Otherwise, add a random digit.
-			randomIndex = Math.floor(Math.random() * digits.length);
-			otp += digits[randomIndex];
-		}
+  
+	for (let i = 0; i < n; i++) {
+	  const randomIndex = Math.floor(Math.random() * digits.length);
+	  otp += digits[randomIndex];
 	}
-
+  
 	return otp;
-};
+  };
+  
 
 let refreshTokensCollection = [];
 
@@ -87,7 +100,7 @@ const register = async (req, res, next) => {
 
 		await newUser.save();
 
-		otp = otpgen(6);
+		otp = otpgen(4);
 		const auth = new Auth({
 			email,
 			username: email,
@@ -496,7 +509,7 @@ const logout = async (req, res, next) => {
 };
 
 const generate = async (req, res, next) => {
-	const otp_len = 6;
+	const otp_len = 4;
 	const auth_type = "acc_verify";
 	let otp;
 	const email = req.email;
@@ -525,6 +538,7 @@ const generate = async (req, res, next) => {
 		}
 	}
 	try {
+		console.log(otp);
 		await mailer(
 			email,
 			"OTP for verification of FourGear Account",
@@ -556,7 +570,7 @@ const verifyUser = async (username, verified) => {
 const verify = async (req, res, next) => {
 	const auth_type = "acc_verify";
 	const { otp } = req.body;
-	const email = req.email;
+	const email = req.email || req.body.email;
 	if (validateEmail(email)) {
 		let auth = await Auth.findOne({ email, auth_type: auth_type });
 		if (auth) {

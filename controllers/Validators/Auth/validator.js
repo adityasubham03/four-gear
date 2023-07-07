@@ -52,7 +52,7 @@ const verification = (req, res, next) => {
 };
 
 const isOTP = (req, res, next) => {
-	if (req.body.otp) {
+	if (req.body.otp && (req.email || req.body.email)) {
 		next();
 	} else {
 		return res.status(404).json({

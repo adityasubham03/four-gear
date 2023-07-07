@@ -16,7 +16,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"fname\":\"Aditya\",\n    \"lname\":\"Choudhury\",\n    \"email\":\"adityasubham03@gmail.com\",\n    \"password\":\"27Adich@\"\n}",
+							"raw": "{\n    \"fname\":\"Aditya\",\n    \"lname\":\"Choudhury\",\n    \"email\":\"aditya@adityachoudhury.com\",\n    \"password\":\"27Adich@\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -49,7 +49,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"email\":\"adityasubham03@gmail.com\",\n    \"password\":\"27Adich@\"\n}",
+							"raw": "{\n    \"email\":\"aditya@adityachoudhury.com\",\n    \"password\":\"27Adich@\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -174,7 +174,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDc5Yjk4YzQ5YjJhYjY3ODkyZDZmODEiLCJmbmFtZSI6IkFkaXR5YSIsImxuYW1lIjoiQ2hvdWRodXJ5IiwiZW1haWwiOiJhZGl0eWFzdWJoYW0wM0BnbWFpbC5jb20iLCJsZXZlbCI6MCwiaWF0IjoxNjg2NDA2Mjg4LCJleHAiOjE2ODY0MDYzMDh9.WX6bhHb_ymYQH52ZaG9zvZdUFn4y_wRbx98TQYwqAyA",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDc5Yjk4YzQ5YjJhYjY3ODkyZDZmODEiLCJmbmFtZSI6IkFkaXR5YSIsImxuYW1lIjoiQ2hvdWRodXJ5IiwiZW1haWwiOiJhZGl0eWFzdWJoYW0wM0BnbWFpbC5jb20iLCJsZXZlbCI6MCwidmVyaWZpZWQiOnRydWUsImlhdCI6MTY4ODQwMzU0OX0.T-B3LnU660y-YzdBqVa2Z8TBvqdNGqiPJMoOeh1X72I",
 									"type": "string"
 								}
 							]
@@ -205,7 +205,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDc5Yjk4YzQ5YjJhYjY3ODkyZDZmODEiLCJmbmFtZSI6IkFkaXR5YSIsImxuYW1lIjoiQ2hvdWRodXJ5IiwiZW1haWwiOiJhZGl0eWFzdWJoYW0wM0BnbWFpbC5jb20iLCJsZXZlbCI6MCwidmVyaWZpZWQiOmZhbHNlLCJpYXQiOjE2ODc3MTkxNDAsImV4cCI6MTY4NzcxOTE2MH0.tAzq-1D82v1z3UWTKdZSp8u_u9CSRAxZKo8PBJBMINs",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NGE3ZDE4ZDE5NDJlZDMwMmYzM2ZiMWEiLCJmbmFtZSI6IkFkaXR5YSIsImxuYW1lIjoiQ2hvdWRodXJ5IiwiZW1haWwiOiJhZGl0eWFAYWRpdHlhY2hvdWRodXJ5LmNvbSIsImxldmVsIjoxLCJ2ZXJpZmllZCI6ZmFsc2UsImlhdCI6MTY4ODcyNTQ0MywiZXhwIjoxNjg4NzI1NDYzfQ._OOYWuEOOuDQGY72TNXofJRgXhXvx5-nI9nFVVHzyKA",
 									"type": "string"
 								}
 							]
@@ -236,6 +236,47 @@
 							"bearer": [
 								{
 									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NGE3ZDE4ZDE5NDJlZDMwMmYzM2ZiMWEiLCJmbmFtZSI6IkFkaXR5YSIsImxuYW1lIjoiQ2hvdWRodXJ5IiwiZW1haWwiOiJhZGl0eWFAYWRpdHlhY2hvdWRodXJ5LmNvbSIsImxldmVsIjoxLCJ2ZXJpZmllZCI6ZmFsc2UsImlhdCI6MTY4ODcyNTQ3MCwiZXhwIjoxNjg4NzI1NDkwfQ.OxHWVyEA8NP3K2M-41wmbdOxPIbVcP0U9a8qj4hAaSM",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"otp\":\"0417\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/auth/register/verify",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"auth",
+								"register",
+								"verify"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Registration Verification",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
 									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDc5Yjk4YzQ5YjJhYjY3ODkyZDZmODEiLCJmbmFtZSI6IkFkaXR5YSIsImxuYW1lIjoiQ2hvdWRodXJ5IiwiZW1haWwiOiJhZGl0eWFzdWJoYW0wM0BnbWFpbC5jb20iLCJsZXZlbCI6MCwidmVyaWZpZWQiOmZhbHNlLCJpYXQiOjE2ODc3MTkyODcsImV4cCI6MTY4NzcxOTMwN30.vT9arEZ6QpxBiZT80gc6yEz5CYrg4plDgBjNC2G6884",
 									"type": "string"
 								}
@@ -245,7 +286,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"otp\":\"535TV5\"\r\n}",
+							"raw": "{\r\n    \"otp\":\"0417\",\r\n    \"email\":\"aditya@adityachoudhury.com\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -253,7 +294,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:5000/api/auth/verify",
+							"raw": "http://localhost:5000/api/auth/register/verify",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -262,6 +303,7 @@
 							"path": [
 								"api",
 								"auth",
+								"register",
 								"verify"
 							]
 						}
@@ -280,7 +322,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"name\":\"Aditya Choudhury\",\n    \"phone\":9668111905,\n    \"email\":\"adityasubham03@gmail.com\",\n    \"city\":\"Bhubaneswar\",\n    \"bike_Company\":\"Hero\",\n    \"bike_Model\":\"Xtreme 2013\",\n    \"address\":\"ganga nagar\",\n    \"map\":{\n        \"longitude\":85.8186577,\n        \"latitude\":20.2642714\n    }\n}",
+							"raw": "{\n    \"name\":\"Aditya Choudhury\",\n    \"phone\":9668111905,\n    \"email\":\"adityasubham03@gmail.com\",\n    \"city\":\"Bhubaneswar\",\n    \"bike_Company\":\"Hero\",\n    \"bike_Model\":\"Xtreme 2013\",\n    \"street\":\"rt\",\n    \"landmark\":\"123\",\n    \"address\":\"ganga nagar\",\n    \"map\":{\n        \"longitude\":85.8186577,\n        \"latitude\":20.2642714\n    }\n}",
 							"options": {
 								"raw": {
 									"language": "json"
