@@ -84,6 +84,7 @@ const register = async (req, res, next) => {
 		});
 
 		await newUser.save();
+		
 		return res.status(201).json({
 			message: Register_MSG.signupSuccess,
 			success: true,
