@@ -29,16 +29,18 @@ const BikeBookingSchema = new Schema({
 		required: true,
 	},
 	address: {
-		type: String,
-		required: true,
-	},
-	street:{
-		type: String,
-		required:true,
-	},
-	landmark: {
-		type:String,
-		required:true,
+		address: {
+			type: String,
+			required: true,
+		},
+		street:{
+			type: String,
+			required:true,
+		},
+		landmark: {
+			type:String,
+			required:true,
+		},
 	},
 	isConfirmed: {
 		type: Boolean,
