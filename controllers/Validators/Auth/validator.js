@@ -40,11 +40,12 @@ const isadmin = (req, res, next) => {
 
 const verification = (req, res, next) => {
 	if (req.verified) {
-		return res.status(200).json({
-			reason: "verified",
-			message: "user already verified",
-			success: false,
-		});
+		next();
+		// return res.status(200).json({
+		// 	reason: "verified",
+		// 	message: "user already verified",
+		// 	success: false,
+		// });
 	} else {
 		next();
 	}
