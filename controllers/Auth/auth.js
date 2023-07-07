@@ -64,6 +64,7 @@ const otpgen = (length) => {
 let refreshTokensCollection = [];
 
 const register = async (req, res, next) => {
+	const auth_type = "acc_verify";
 	try {
 		const level = 1;
 		const signupRequest = await signupSchema.validateAsync(req.body);
@@ -82,9 +83,46 @@ const register = async (req, res, next) => {
 			password,
 			level,
 		});
+		const email = signupRequest.email;
 
 		await newUser.save();
-		
+
+		otp = otpgen(6);
+		const auth = new Auth({
+			email,
+			username: email,
+			auth_type,
+			otp,
+		});
+
+		try {
+			await auth.save();
+		} catch (err) {
+			console.log(err);
+			return res.status(500).json({
+				reason: "error",
+				message: "Internal Server Error! Cannot generate OTP!",
+				success: false,
+			});
+		}
+
+		try {
+			await mailer(
+				email,
+				"OTP for verification of FourGear Account",
+				`Your OTP is:- ${otp}`,
+				email,
+				auth_type
+			);
+		} catch (err) {
+			return res.status(500).json({
+				reason: "server",
+				message:
+					"Internal Server Error! Cannot Send Mail. Please try again later!!",
+				success: false,
+			});
+		}
+
 		return res.status(201).json({
 			message: Register_MSG.signupSuccess,
 			success: true,
@@ -351,7 +389,7 @@ const refresh = async (req, res, next) => {
 			success: false,
 		});
 	} else {
-		const user = await User.findOne({ email: email },"-password");
+		const user = await User.findOne({ email: email }, "-password");
 		let token = jwt.sign(
 			{
 				_id: user._id,
