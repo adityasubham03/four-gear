@@ -7,9 +7,12 @@ const bikeServiceBookingSchema = Joi.object({
 	city: Joi.string().required(),
 	bike_Company: Joi.string().required(),
 	bike_Model: Joi.string().required(),
-	address: Joi.string().required(),
-	street: Joi.string().required(),
-	landmark: Joi.string().required(),
+	
+	address: Joi.object({
+		address: Joi.string().required(),
+		street: Joi.string().required(),
+		landmark: Joi.string().required(),
+	}),
 	map: Joi.object({
 		longitude: Joi.number().required(),
 		latitude: Joi.number().required(),
