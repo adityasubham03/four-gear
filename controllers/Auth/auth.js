@@ -64,15 +64,14 @@ const Register_MSG = {
 const otpgen = (n) => {
 	const digits = "0123456789";
 	let otp = "";
-  
+
 	for (let i = 0; i < n; i++) {
-	  const randomIndex = Math.floor(Math.random() * digits.length);
-	  otp += digits[randomIndex];
+		const randomIndex = Math.floor(Math.random() * digits.length);
+		otp += digits[randomIndex];
 	}
-  
+
 	return otp;
-  };
-  
+};
 
 let refreshTokensCollection = [];
 
@@ -81,9 +80,56 @@ const register = async (req, res, next) => {
 	try {
 		const level = 1;
 		const signupRequest = await signupSchema.validateAsync(req.body);
+		let email = signupRequest.email;
+		let emailNotRegistered = await User.findOne({email});
+		
+		if (emailNotRegistered) {
+			if (emailNotRegistered.verified == false) {
+				try {
+					const password = await bcrypt.hash(signupRequest.password, 12);
+					emailNotRegistered.password = password;
+					await emailNotRegistered.save();
+					let auth = Auth.findOne({ email, auth_type });
+					let otp;
+					if (auth) {
+						otp = auth.otp;
+					} else {
+						otp = otpgen(4);
+						auth = new Auth({
+							email,
+							username: email,
+							auth_type,
+							otp,
+						});
 
-		let emailNotRegistered = await validateEmail(signupRequest.email);
-		if (!emailNotRegistered) {
+						try {
+							await auth.save();
+						} catch (err) {
+							console.log(err);
+							return res.status(500).json({
+								reason: "error",
+								message: "Internal Server Error! Cannot generate OTP!",
+								success: false,
+							});
+						}
+					}
+					await mailer(
+						emailNotRegistered.email,
+						"OTP for verification of FourGear Account",
+						`Your OTP is:- ${otp}`,
+						emailNotRegistered.email,
+						auth_type
+					);
+				} catch (err) {
+					return res.status(500).json({
+						reason: "server",
+						message:
+							"Internal Server Error! Cannot Send Mail. Please try again later!!",
+						success: false,
+					});
+				}
+				return res.status(409).json();
+			}
 			return res.status(400).json({
 				message: Register_MSG.emailExists,
 				success: false,
@@ -96,7 +142,6 @@ const register = async (req, res, next) => {
 			password,
 			level,
 		});
-		const email = signupRequest.email;
 
 		await newUser.save();
 
