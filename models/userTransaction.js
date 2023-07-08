@@ -22,6 +22,17 @@ const UserTransactionSchema = new Schema({
     type: Boolean,
     default: false,
   },
+  currentPartnerIndex: {
+    type: Number, 
+  },
+  isCurrentPartnerResponded: {
+    type: Boolean,
+    default: false,
+  },
+  isCompleted: {
+    type: Boolean,
+    default: false,
+  },
   partsReplaced: [
     {
       name: {

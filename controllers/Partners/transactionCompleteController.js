@@ -5,7 +5,7 @@ const {
 	transactionSchema,
 } = require("../Validators/userTransaction/validator");
 const { FAST2API_API_KEY } = require("../../config/db");
-const axios = require("axios");
+const axios = require('axios');
 
 const Register_MSG = {
 	signupSuccess: "Transaction successfully saved.",
