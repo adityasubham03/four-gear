@@ -16,6 +16,14 @@ const loginSchema = Joi.object({
 		.required(),
 });
 
+const PasswordSchema = Joi.object({
+	password: Joi.string()
+		.pattern(new RegExp("^[a-zA-Z0-9!@#$%^&*()_]{3,30}$"))
+		.min(8)
+		.required(),
+	otp: Joi.string().required(),
+});
+
 const signupSchema = Joi.object({
 	fname: Joi.string().min(1).required(),
 	lname: Joi.string().min(1).required(),
@@ -70,4 +78,5 @@ module.exports = {
 	isadmin,
 	verification,
 	isOTP,
+	PasswordSchema,
 };
