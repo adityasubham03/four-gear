@@ -16,7 +16,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"fname\":\"Aditya\",\n    \"lname\":\"Choudhury\",\n    \"email\":\"aditya@adityachoudhury.com\",\n    \"password\":\"27Adich@\"\n}",
+							"raw": "{\n    \"fname\":\"Aditya\",\n    \"lname\":\"Choudhury\",\n    \"email\":\"aditya@adityachoudhury.com\",\n    \"password\":\"1234567@\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -49,7 +49,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"email\":\"aditya@adityachoudhury.com\",\n    \"password\":\"27Adich@\"\n}",
+							"raw": "{\n    \"email\":\"aditya@adityachoudhury.com\",\n    \"password\":\"adityasubham\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -305,6 +305,89 @@
 								"auth",
 								"register",
 								"verify"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Forget",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\":\"aditya@adityachoudhury.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/auth/forget",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"auth",
+								"forget"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ForgetIsValid",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/api/auth/forget/f7f46ac82d1e00c4344d702e5762016bc81c1a9e42a5be67d5613a3d3ac29c02",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"auth",
+								"forget",
+								"f7f46ac82d1e00c4344d702e5762016bc81c1a9e42a5be67d5613a3d3ac29c02"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Forget Save",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"otp\":\"f7f46ac82d1e00c4344d702e5762016bc81c1a9e42a5be67d5613a3d3ac29c02\",\r\n    \"password\":\"adityasubham\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/auth/forget/save",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"auth",
+								"forget",
+								"save"
 							]
 						}
 					},

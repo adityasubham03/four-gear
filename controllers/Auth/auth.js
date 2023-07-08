@@ -5,11 +5,13 @@ const { mailer } = require("../Mailer/mailer");
 const bcrypt = require("bcrypt");
 const Joi = require("joi");
 const jwt = require("jsonwebtoken");
+const crypto = require("crypto");
 
 const {
 	loginSchema,
 	signupSchema,
 	validateEmail,
+	PasswordSchema,
 } = require("../Validators/Auth/validator");
 
 const { JWT_SECRET, JWT_REFRESH_TOKEN_SECRET } = require("../../config/db");
@@ -64,26 +66,73 @@ const Register_MSG = {
 const otpgen = (n) => {
 	const digits = "0123456789";
 	let otp = "";
-  
+
 	for (let i = 0; i < n; i++) {
-	  const randomIndex = Math.floor(Math.random() * digits.length);
-	  otp += digits[randomIndex];
+		const randomIndex = Math.floor(Math.random() * digits.length);
+		otp += digits[randomIndex];
 	}
-  
+
 	return otp;
-  };
-  
+};
 
 let refreshTokensCollection = [];
 
 const register = async (req, res, next) => {
 	const auth_type = "acc_verify";
+	const level = 1;
+	let otp;
 	try {
-		const level = 1;
 		const signupRequest = await signupSchema.validateAsync(req.body);
+		let email = signupRequest.email;
+		let emailNotRegistered = await User.findOne({ email });
 
-		let emailNotRegistered = await validateEmail(signupRequest.email);
-		if (!emailNotRegistered) {
+		if (emailNotRegistered) {
+			if (emailNotRegistered.verified == false) {
+				try {
+					const password = await bcrypt.hash(signupRequest.password, 12);
+					emailNotRegistered.password = password;
+					await emailNotRegistered.save();
+					let auth = await Auth.findOne({ email, auth_type: auth_type });
+
+					if (auth) {
+						otp = auth.otp;
+					} else {
+						otp = otpgen(4);
+						auth = new Auth({
+							email,
+							username: email,
+							auth_type,
+							otp,
+						});
+
+						try {
+							await auth.save();
+						} catch (err) {
+							console.log(err);
+							return res.status(500).json({
+								reason: "error",
+								message: "Internal Server Error! Cannot generate OTP!",
+								success: false,
+							});
+						}
+					}
+					await mailer(
+						emailNotRegistered.email,
+						"OTP for verification of FourGear Account",
+						`Your OTP is:- ${otp}`,
+						emailNotRegistered.email,
+						auth_type
+					);
+				} catch (err) {
+					return res.status(500).json({
+						reason: "server",
+						message:
+							"Internal Server Error! Cannot Send Mail. Please try again later!!",
+						success: false,
+					});
+				}
+				return res.status(409).json();
+			}
 			return res.status(400).json({
 				message: Register_MSG.emailExists,
 				success: false,
@@ -96,7 +145,6 @@ const register = async (req, res, next) => {
 			password,
 			level,
 		});
-		const email = signupRequest.email;
 
 		await newUser.save();
 
@@ -604,6 +652,88 @@ const verify = async (req, res, next) => {
 	}
 };
 
+//Hashing the forget otp
+function hashString(string) {
+	const hash = crypto.createHash("sha256");
+	hash.update(string);
+	return hash.digest("hex");
+}
+
+const forget = async (req, res, next) => {
+	const auth_type = "pass_reset";
+	const { email } = req.body;
+	const user = await User.findOne({ email: email });
+	if (!user) {
+		return res.status(404).json({
+			reason: "email",
+			message: "Account associated with this E-Mail Id not found!!",
+			success: false,
+		});
+	}
+	const username = user.email;
+
+	let auth = await Auth.findOne({ email: email, auth_type: auth_type });
+	const currentDate = new Date().toISOString().slice(0, 10); // Get current date in YYYY-MM-DD format
+	const salt = crypto.randomBytes(16).toString("hex"); // Generate a random salt
+	const stringToHash = currentDate + email + salt;
+	const otp = hashString(stringToHash);
+	if (auth) {
+		auth.otp = otp;
+	} else {
+		auth = new Auth({
+			email,
+			username,
+			auth_type,
+			otp,
+		});
+	}
+	await auth.save();
+	mailer(
+		email,
+		"Password Reset Link | Four Gear",
+		`To reset your password click this link:- <a href="http://localhost:5173/forget/${otp}" target="_blank">http://localhost:5173/forget/${otp}</a>`,
+		username,
+		auth_type
+	);
+	return res.status(200).json({
+		message: "Password Reset Link Sent to the E-Mail ID",
+		success: true,
+	});
+};
+
+const forgetIsValid = async (req, res, next) => {
+	const auth_type = "pass_reset";
+	const { otp } = req.params;
+	const auth = await Auth.findOne({ otp: otp, auth_type: auth_type });
+	// console.log(auth);
+
+	return auth ? res.status(200).json() : res.status(404).json();
+};
+
+const forget_save = async (req, res, next) => {
+	const auth_type = "pass_reset";
+	const { password, otp } = req.body;
+	try {
+		const LoginRequest = await PasswordSchema.validateAsync(req.body);
+		const auth = await Auth.findOne({ otp: otp, auth_type: auth_type });
+		const user = await User.findOne({
+			email: auth.email,
+		});
+		if (!user) {
+			return res.status(404).json();
+		}
+		user.password = await bcrypt.hash(password, 12);
+		await user.save();
+		await Auth.findByIdAndDelete(auth._id);
+		return res.json();
+	} catch (err) {
+		console.log(err);
+		return res
+			.status(400)
+			.json("Please try again with password with min. 8 characters");
+	}
+};
+
 module.exports = {
 	login,
 	register,
@@ -615,4 +745,7 @@ module.exports = {
 	logout,
 	generate,
 	verify,
+	forget,
+	forgetIsValid,
+	forget_save,
 };

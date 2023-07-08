@@ -10,6 +10,9 @@ const {
 	logout,
 	generate,
 	verify,
+	forget,
+	forgetIsValid,
+	forget_save,
 } = require("../controllers/Auth/auth");
 const {
 	isadmin,
@@ -28,5 +31,8 @@ router.get("/user", verifytoken, getuser);
 router.get("/refresh", verifyRefreshToken, refresh);
 router.get("/user/:email/", verifytoken, isadmin, getuseradmin);
 router.post("/logout", verifytoken, logout);
+router.post("/forget", forget);
+router.get("/forget/:otp", forgetIsValid);
+router.post("/forget/save", forget_save);
 
 module.exports = router;
