@@ -77,20 +77,21 @@ let refreshTokensCollection = [];
 
 const register = async (req, res, next) => {
 	const auth_type = "acc_verify";
+	const level = 1;
+	let otp;
 	try {
-		const level = 1;
 		const signupRequest = await signupSchema.validateAsync(req.body);
 		let email = signupRequest.email;
-		let emailNotRegistered = await User.findOne({email});
-		
+		let emailNotRegistered = await User.findOne({ email });
+
 		if (emailNotRegistered) {
 			if (emailNotRegistered.verified == false) {
 				try {
 					const password = await bcrypt.hash(signupRequest.password, 12);
 					emailNotRegistered.password = password;
 					await emailNotRegistered.save();
-					let auth = Auth.findOne({ email, auth_type });
-					let otp;
+					let auth = await Auth.findOne({ email, auth_type: auth_type });
+
 					if (auth) {
 						otp = auth.otp;
 					} else {
