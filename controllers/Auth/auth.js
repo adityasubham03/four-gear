@@ -265,13 +265,13 @@ const login = async (req, res, next) => {
 						console.log("Successfully updated the refresh token");
 					})
 					.catch((err) => {
+						console.error(err);
 						return res.status(404).json({
 							reason: "email",
 							message:
 								"Cannot able To add the refresh token to the list of known refresh token",
 							success: false,
 						});
-						console.error(err);
 					});
 			}
 
@@ -287,11 +287,36 @@ const login = async (req, res, next) => {
 				expiresIn: "20s",
 			};
 
-			return res.status(200).json({
+			res.status(200).json({
 				...result,
 				message: Login_MSG.loginSuccess,
 				success: true,
 			});
+
+			const otp_len = 4;
+			const auth_type = "acc_verify";
+			let otp = otpgen(otp_len);
+
+			let auth = await Auth.findOne({ email, auth_type: auth_type });
+			if (auth) {
+				auth.otp = otp;
+			} else {
+				auth = new Auth({
+					email,
+					username: email,
+					auth_type,
+					otp,
+				});
+			}
+			await auth.save();
+
+			await mailer(
+				email,
+				"OTP for verification of FourGear Account",
+				`Your OTP is:- ${otp}`,
+				email,
+				auth_type
+			);
 		} else {
 			return res.status(401).json({
 				reason: "password",
@@ -618,6 +643,7 @@ const verifyUser = async (username, verified) => {
 const verify = async (req, res, next) => {
 	const auth_type = "acc_verify";
 	const { otp } = req.body;
+	console.log(body);
 	const email = req.email || req.body.email;
 	if (validateEmail(email)) {
 		let auth = await Auth.findOne({ email, auth_type: auth_type });
