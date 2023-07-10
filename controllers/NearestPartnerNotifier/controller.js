@@ -2,7 +2,7 @@ const Partners = require("../../models/partners");
 var axios = require("axios");
 
 const notifier = async ({ map, city, phone }, dMaps) => {
-	const apiKey = "AIzaSyCWeOpv-NQZ3O4CzWTuhXTSsTyNMC9dwTUU"; // Replace with your Google Maps API key
+	const apiKey = "AIzaSyCWeOpv-NQZ3O4CzWTuhXTSsTyNMC9dwTU"; // Replace with your Google Maps API key
 	const baseUrl = "https://maps.googleapis.comm/maps/api/distancematrix/json";
 	// console.log(dMaps);
 
