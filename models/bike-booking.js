@@ -33,13 +33,13 @@ const BikeBookingSchema = new Schema({
 			type: String,
 			required: true,
 		},
-		street:{
+		street: {
 			type: String,
-			required:true,
+			required: true,
 		},
 		landmark: {
-			type:String,
-			required:true,
+			type: String,
+			required: true,
 		},
 	},
 	isConfirmed: {
@@ -89,6 +89,18 @@ const BikeBookingSchema = new Schema({
 		default: false,
 	},
 	isAbandoned: {
+		type: Boolean,
+		default: false,
+	},
+	isBillGenerated: {
+		type: Boolean,
+		default: false,
+	},
+	billId: {
+		type: String,
+		default: null,
+	},
+	paid: {
 		type: Boolean,
 		default: false,
 	},
