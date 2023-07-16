@@ -94,7 +94,7 @@ const login = async (req, res, next) => {
 					level: user.level,
 				},
 				JWT_SECRET,
-				{ expiresIn: "20s" }
+				{ expiresIn: "20m" }
 			);
 
 			let refreshToken = jwt.sign(
@@ -142,7 +142,7 @@ const login = async (req, res, next) => {
 				level: user.level,
 				token: token,
 				refreshToken: refreshToken,
-				expiresIn: "20s",
+				expiresIn: "20m",
 			};
 
 			return res.status(200).json({
@@ -342,7 +342,7 @@ const refresh = async (req, res, next) => {
 				level: req.level,
 			},
 			JWT_SECRET,
-			{ expiresIn: "20s" }
+			{ expiresIn: "20m" }
 		);
 		return res.status(200).json({
 			token,

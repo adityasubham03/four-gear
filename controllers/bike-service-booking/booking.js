@@ -17,7 +17,7 @@ const book = async (req, res, next) => {
 		const booking = await bikeServiceBookingSchema.validateAsync(req.body);
 		const { city } = req.body;
 		const dMaps = await Partners.find({ city: city }, { map: 1, phone: 1 });
-		// console.log(dMaps);
+		console.log(dMaps);
 		if (dMaps.length == 0) {
 			return res.status(404).json({
 				reason: "no-center",
@@ -50,6 +50,9 @@ const book = async (req, res, next) => {
 		if (err.isJoi === true) {
 			err.status = 403;
 			errorMsg = err.message;
+		} else if (err.isNotifier) {
+			err.status = 500;
+			errorMsg = "Unable to connect to notifier service!! Please try again later."
 		}
 		console.log(err);
 		return res.status(err.status).json({
