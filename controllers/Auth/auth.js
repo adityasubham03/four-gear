@@ -643,7 +643,7 @@ const verifyUser = async (username, verified) => {
 const verify = async (req, res, next) => {
 	const auth_type = "acc_verify";
 	const { otp } = req.body;
-	console.log(body);
+	// console.log(body);
 	const email = req.email || req.body.email;
 	if (validateEmail(email)) {
 		let auth = await Auth.findOne({ email, auth_type: auth_type });
