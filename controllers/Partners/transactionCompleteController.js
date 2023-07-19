@@ -5,7 +5,8 @@ const {
 	transactionSchema,
 } = require("../Validators/userTransaction/validator");
 const { FAST2API_API_KEY } = require("../../config/db");
-const axios = require('axios');
+const axios = require("axios");
+const { mailer } = require("../Mailer/mailer");
 
 const Register_MSG = {
 	signupSuccess: "Transaction successfully saved.",
@@ -153,6 +154,9 @@ const confirmBooking = async (req, res, next) => {
 					message: "No data found!!",
 					success: false,
 				});
+			}
+			if (req.phone != service.phone) {
+				return res.status(403).json();
 			} else {
 				if (service.isConfirmed) {
 					return res.status(403).json({
@@ -162,7 +166,13 @@ const confirmBooking = async (req, res, next) => {
 					});
 				} else {
 					service.isConfirmed = true;
+					service.isAssigned = true;
 					await service.save();
+					await mailer(
+						service.email,
+						"Service Center has Accepted your booking!",
+						`<h1>Your booking request has been granted</h1><p>Servie center name:- ${service.partnerName}<br>Partner Phone Number:- ${service.distances}</p>`
+					);
 					return res.status(200).json({
 						data: "Successfully confirmed servicing!",
 						success: true,
@@ -198,19 +208,28 @@ const declineBooking = async (req, res, next) => {
 					message: "No data found!!",
 					success: false,
 				});
+			}
+			if (req.phone != service.distances[service.current].phone) {
+				return res.status(403).json();
 			} else {
+				if (service.isConfirmed || service.isCompleted || service.isAssigned) {
+					return res.status(403).json();
+				}
 				const len = service.distances.length;
-				if (len >= service.current) {
+				console.log(len);
+				if (service.current >= len) {
 					service.isAbandoned = true;
 					service.isCompleted = true;
-					service.save();
+					await service.save();
 				} else {
-					service.current += 1;
+					service.current = service.current + 1;
+					console.log(service.current);
 					service.assignedTo = service.distances[service.current].phone;
 					const partner = await partners.findOne({ phone: service.assignedTo });
 					service.partnerName = partner.shopName;
-					service.save();
+					await service.save();
 				}
+				console.log(service.current);
 			}
 			return res.status(200).json({
 				data: "Successfully declined servicing!",

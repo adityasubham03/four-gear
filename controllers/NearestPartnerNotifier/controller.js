@@ -3,17 +3,18 @@ var axios = require("axios");
 
 const notifier = async ({ map, city, phone }, dMaps) => {
 	const apiKey = "AIzaSyCWeOpv-NQZ3O4CzWTuhXTSsTyNMC9dwTU"; // Replace with your Google Maps API key
-	const baseUrl = "https://maps.googleapis.comm/maps/api/distancematrix/json";
-	// console.log(dMaps);
+	const baseUrl = "https://maps.googleapis.com/maps/api/distancematrix/json";
+	console.log("dmaps",dMaps);
+
 
 	const distances = [];
-
+	console.log("here3");
 	const origins = `${map.latitude},${map.longitude}`;
 	const destinationsString = dMaps
 		.map((dest) => `${dest.map.latitude},${dest.map.longitude}`)
 		.join("|");
 
-	// console.log(destinationsString);
+	console.log(destinationsString);
 	try {
 		const { data } = await axios.get(baseUrl, {
 			params: {
@@ -22,8 +23,11 @@ const notifier = async ({ map, city, phone }, dMaps) => {
 				destinations: destinationsString,
 			},
 		});
+		console.log("here4");
+		console.log(data);
 	
 		if (!data || data.status === "REQUEST_DENIED") {
+			console.log("here1");
 			throw {
 				isNotifier: true,
 				status: 500,
@@ -50,7 +54,8 @@ const notifier = async ({ map, city, phone }, dMaps) => {
 		// console.log(distances);
 		
 	} catch (err) {
-		// console.log(err);
+		console.log(err);
+		console.log("her2");
 		throw {
 			isNotifier: true,
 			status: 500,

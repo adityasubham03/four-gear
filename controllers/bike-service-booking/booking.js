@@ -17,7 +17,7 @@ const book = async (req, res, next) => {
 		const booking = await bikeServiceBookingSchema.validateAsync(req.body);
 		const { city } = req.body;
 		const dMaps = await Partners.find({ city: city }, { map: 1, phone: 1 });
-		console.log(dMaps);
+		// console.log(dMaps);
 		if (dMaps.length == 0) {
 			return res.status(404).json({
 				reason: "no-center",
@@ -45,6 +45,7 @@ const book = async (req, res, next) => {
 			message: Register_MSG.signupSuccess,
 			success: true,
 		});
+		
 	} catch (err) {
 		let errorMsg = Register_MSG.signupError;
 		if (err.isJoi === true) {
