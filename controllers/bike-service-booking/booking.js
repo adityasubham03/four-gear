@@ -30,7 +30,7 @@ const book = async (req, res, next) => {
 		// console.log(distances);
 		const assigned = await Partners.findOne({ phone: distances[0].phone });
 		// console.log(assigned);
-			
+
 		const newbooking = new bike({
 			...booking,
 			distances,
@@ -40,12 +40,10 @@ const book = async (req, res, next) => {
 
 		await newbooking.save();
 
-
 		return res.status(201).json({
 			message: Register_MSG.signupSuccess,
 			success: true,
 		});
-		
 	} catch (err) {
 		let errorMsg = Register_MSG.signupError;
 		if (err.isJoi === true) {
@@ -53,7 +51,8 @@ const book = async (req, res, next) => {
 			errorMsg = err.message;
 		} else if (err.isNotifier) {
 			err.status = 500;
-			errorMsg = "Unable to connect to notifier service!! Please try again later."
+			errorMsg =
+				"Unable to connect to notifier service!! Please try again later.";
 		}
 		console.log(err);
 		return res.status(err.status).json({
@@ -86,7 +85,7 @@ const viewBookingUser = async (req, res, next) => {
 	let email = req.email;
 	let bookings;
 	try {
-		bookings = await bike.find({email:email});
+		bookings = await bike.find({ email: email });
 		if (bookings[0]) {
 			return res.status(200).json({ data: { ...bookings }, success: "true" });
 		} else {
@@ -106,16 +105,16 @@ const viewBookingPartner = async (req, res, next) => {
 	let partnerId = req.phone;
 	let bookings;
 	try {
-		bookings = await bike.find();
+		bookings = await bike.find({ assignedTo: partnerId });
 		if (bookings[0]) {
 			return res.status(200).json({ data: { ...bookings }, success: "true" });
 		} else {
 			return res
 				.status(404)
-				.json({ success: "false", message: "No bookings found!!" });
+				.json({ success: "true", message: "No bookings found!!" });
 		}
 	} catch (e) {
-		return res.status(e.status).json({
+		return res.status(e.status || 500).json({
 			message: "Unexpected Error",
 			success: false,
 		});
@@ -126,4 +125,5 @@ module.exports = {
 	book,
 	viewBooking,
 	viewBookingUser,
+	viewBookingPartner,
 };

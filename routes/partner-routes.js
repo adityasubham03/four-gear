@@ -5,7 +5,7 @@ const {
 	login,
 	getuser,
 	verifytoken,
-    verifyRefreshToken,
+	verifyRefreshToken,
 	refresh,
 	service,
 } = require("../controllers/Partners/partners-controllers");
@@ -19,18 +19,22 @@ const {
 	notify,
 } = require("../controllers/Partners/transactionCompleteController");
 const { generateBill } = require("../controllers/Partners/bill-generator");
+const {
+	viewBookingPartner,
+} = require("../controllers/bike-service-booking/booking");
 
 const router = express.Router();
 
 router.post("/register", register);
 router.post("/login", login);
-router.get( "/user", verifytoken,getuser);
+router.get("/user", verifytoken, getuser);
 router.get("/refresh", verifyRefreshToken, refresh);
+router.get("/bike", verifytoken, viewBookingPartner);
 // router.get("/", get);
 // router.get("/", get);
 // router.get("/:id", get);
 router.get("/service", verifytoken, service);
-router.post("/")
+router.post("/");
 
 // router.get("/:id/:date", verifytoken, dayWiseTransactionHistory);
 router.get("/:id/saveTransaction", verifytoken, saveTransaction);
@@ -41,6 +45,5 @@ router.get("/bill/:billid", verifytoken);
 router.get("/sendUserSms/:bookingid", verifytoken, sendUserSms);
 router.get("/sendPartnerSms/:bookingid", verifytoken, sendPartnerSms);
 router.get("/notify", verifytoken, notify);
-
 
 module.exports = router;
