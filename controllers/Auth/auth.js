@@ -233,7 +233,7 @@ const login = async (req, res, next) => {
 					verified: user.verified,
 				},
 				JWT_SECRET,
-				{ expiresIn: "20s" }
+				{ expiresIn: "20m" }
 			);
 
 			let refreshToken = jwt.sign(
@@ -284,7 +284,7 @@ const login = async (req, res, next) => {
 				verified: user.verified,
 				token: token,
 				refreshToken: refreshToken,
-				expiresIn: "20s",
+				expiresIn: "20m",
 			};
 
 			res.status(200).json({
@@ -486,7 +486,7 @@ const refresh = async (req, res, next) => {
 				verified: user.verified,
 			},
 			JWT_SECRET,
-			{ expiresIn: "20s" }
+			{ expiresIn: "20m" }
 		);
 		return res.status(200).json({
 			data: {

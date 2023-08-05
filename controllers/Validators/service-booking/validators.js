@@ -1,13 +1,14 @@
 const Joi = require("joi");
 
 const bikeServiceBookingSchema = Joi.object({
-	name: Joi.string().required(),
-	phone: Joi.number().required(),
-	email: Joi.string().email().required(),
-	city: Joi.string().required(),
-	bike_Company: Joi.string().required(),
-	bike_Model: Joi.string().required(),
-	
+	bookingDetails: Joi.object({
+		name: Joi.string().required(),
+		phone: Joi.number().required(),
+		email: Joi.string().email().required(),
+		city: Joi.string().required(),
+		bike_Company: Joi.string().required(),
+		bike_Model: Joi.string().required(),
+	}),
 	address: Joi.object({
 		address: Joi.string().required(),
 		street: Joi.string().required(),

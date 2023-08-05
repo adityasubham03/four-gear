@@ -15,7 +15,8 @@ const Register_MSG = {
 const book = async (req, res, next) => {
 	try {
 		const booking = await bikeServiceBookingSchema.validateAsync(req.body);
-		const { city } = req.body;
+		const { bookingDetails: { city } } = booking;
+		console.log(city);
 		const dMaps = await Partners.find({ city: city }, { map: 1, phone: 1 });
 		// console.log(dMaps);
 		if (dMaps.length == 0) {
@@ -88,7 +89,7 @@ const viewBookingUser = async (req, res, next) => {
 		bookings = await bike.find({ email: email });
 		if (bookings[0]) {
 			return res.status(200).json({ data: { ...bookings }, success: "true" });
-		} else {
+		} else {zs
 			return res
 				.status(404)
 				.json({ success: "false", message: "No bookings found!!" });

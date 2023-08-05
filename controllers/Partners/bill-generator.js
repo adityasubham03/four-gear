@@ -31,9 +31,9 @@ const generateBill = async (req, res, next) => {
 
 		const bill = new Bill({
 			...billRequest,
-			phoneNumber: booking.phone,
-			customerName: booking.name,
-			bikeModel: `${booking.bike_Company} ${booking.bike_Model}`,
+			phoneNumber: booking.bookingDetails.phone,
+			customerName: booking.bookingDetails.name,
+			bikeModel: `${booking.bookingDetails.bike_Company} ${booking.bookingDetails.bike_Model}`,
 			billedBy: req._id,
 		});
 		await bill.save();

@@ -155,7 +155,7 @@ const confirmBooking = async (req, res, next) => {
 					success: false,
 				});
 			}
-			if (req.phone != service.phone) {
+			if (req.phone != service.bookingDetails.phone) {
 				return res.status(403).json();
 			} else {
 				if (service.isConfirmed) {
@@ -169,7 +169,7 @@ const confirmBooking = async (req, res, next) => {
 					service.isAssigned = true;
 					await service.save();
 					await mailer(
-						service.email,
+						service.bookingDetails.email,
 						"Service Center has Accepted your booking!",
 						`<h1>Your booking request has been granted</h1><p>Servie center name:- ${service.partnerName}<br>Partner Phone Number:- ${service.distances}</p>`
 					);
