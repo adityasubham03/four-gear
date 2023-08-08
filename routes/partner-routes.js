@@ -22,7 +22,6 @@ const { generateBill } = require("../controllers/Partners/bill-generator");
 const {
 	viewBookingPartner,
 	viewRecents,
-	viewBookingPartnerByID,
 } = require("../controllers/bike-service-booking/booking");
 
 const router = express.Router();
@@ -32,13 +31,12 @@ router.post("/login", login);
 router.get("/user", verifytoken, getuser);
 router.get("/refresh", verifyRefreshToken, refresh);
 router.get("/bike", verifytoken, viewBookingPartner);
-router.get("/bike/id/",verifytoken,viewBookingPartnerByID);
 // router.get("/", get);
 // router.get("/", get);
 // router.get("/:id", get);
 router.get("/service", verifytoken, service);
 router.post("/");
-router.get("/recents", verifytoken, viewRecents);
+router.get("/recents", verifytoken,viewRecents);
 
 // router.get("/:id/:date", verifytoken, dayWiseTransactionHistory);
 router.get("/:id/saveTransaction", verifytoken, saveTransaction);

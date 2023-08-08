@@ -106,6 +106,6 @@ const BikeBookingSchema = new Schema({
 		type: Boolean,
 		default: false,
 	},
-});
+},{timestamps:true});
 
 module.exports = model("BikeBooking", BikeBookingSchema);

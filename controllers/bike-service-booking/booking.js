@@ -12,6 +12,7 @@ const Register_MSG = {
 		"No service centers are present in your location! Once they are available we will reach out to you!!",
 };
 
+
 const book = async (req, res, next) => {
 	try {
 		const booking = await bikeServiceBookingSchema.validateAsync(req.body);
@@ -157,12 +158,15 @@ const viewBookingPartnerByID = async (req, res, next) => {
 
 const viewRecents = async (req, res, next) => {
 	let partnerId = req.phone;
+	console.log(partnerId);
 	let bookings;
 	const currentDate = new Date();
 	currentDate.setHours(0, 0, 0, 0);
 
 	const nextDate = new Date(currentDate);
 	nextDate.setDate(currentDate.getDate() + 1);
+	console.log(currentDate);
+	console.log(nextDate);
 	try {
 		bookings = await bike.find({
 			assignedTo: partnerId,
@@ -171,6 +175,7 @@ const viewRecents = async (req, res, next) => {
 				$lt: nextDate,
 			},
 		});
+		console.log(bookings);
 		if (bookings[0]) {
 			return res.status(200).json({ data: { ...bookings }, success: "true" });
 		} else {
@@ -191,5 +196,5 @@ module.exports = {
 	viewBookingUser,
 	viewBookingPartner,
 	viewRecents,
-	viewBookingPartnerByID,
+viewBookingPartnerByID,
 };
