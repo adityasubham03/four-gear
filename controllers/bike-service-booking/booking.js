@@ -15,7 +15,9 @@ const Register_MSG = {
 const book = async (req, res, next) => {
 	try {
 		const booking = await bikeServiceBookingSchema.validateAsync(req.body);
-		const { bookingDetails: { city } } = booking;
+		const {
+			bookingDetails: { city },
+		} = booking;
 		console.log(city);
 		const dMaps = await Partners.find({ city: city }, { map: 1, phone: 1 });
 		// console.log(dMaps);
@@ -89,7 +91,8 @@ const viewBookingUser = async (req, res, next) => {
 		bookings = await bike.find({ email: email });
 		if (bookings[0]) {
 			return res.status(200).json({ data: { ...bookings }, success: "true" });
-		} else {zs
+		} else {
+			zs;
 			return res
 				.status(404)
 				.json({ success: "false", message: "No bookings found!!" });
@@ -122,9 +125,71 @@ const viewBookingPartner = async (req, res, next) => {
 	}
 };
 
+const viewBookingPartnerByID = async (req, res, next) => {
+	let partnerId = req.phone;
+	const { id } = req.body;
+	console.log(id);	
+	if (!id) {
+		return res.status(404).json({
+			success: false,
+			reason: "booking-id",
+			message: "No Booking Id found!!",
+		});
+	}
+	let bookings;
+	try {
+		bookings = await bike.findById(id);
+		if (bookings) {
+			return res.status(200).json({ data: { ...bookings._doc }, success: "true" });
+		} else {
+			return res
+				.status(404)
+				.json({ success: "true", message: "No bookings found!!" });
+		}
+	} catch (e) {
+		console.log(e);
+		return res.status(e.status || 500).json({
+			message: "Unexpected Error",
+			success: false,
+		});
+	}
+};
+
+const viewRecents = async (req, res, next) => {
+	let partnerId = req.phone;
+	let bookings;
+	const currentDate = new Date();
+	currentDate.setHours(0, 0, 0, 0);
+
+	const nextDate = new Date(currentDate);
+	nextDate.setDate(currentDate.getDate() + 1);
+	try {
+		bookings = await bike.find({
+			assignedTo: partnerId,
+			createdAt: {
+				$gte: currentDate,
+				$lt: nextDate,
+			},
+		});
+		if (bookings[0]) {
+			return res.status(200).json({ data: { ...bookings }, success: "true" });
+		} else {
+			return res
+				.status(404)
+				.json({ success: "true", message: "No recents booking found" });
+		}
+	} catch (e) {
+		return res
+			.status(e.status || 500)
+			.json({ message: "Unexpected Error", success: "false" });
+	}
+};
+
 module.exports = {
 	book,
 	viewBooking,
 	viewBookingUser,
 	viewBookingPartner,
+	viewRecents,
+	viewBookingPartnerByID,
 };
