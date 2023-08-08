@@ -260,7 +260,11 @@
 							}
 						},
 						"url": {
+<<<<<<< HEAD
 							"raw": "http://localhost:5000/api/auth//verify",
+=======
+							"raw": "http://localhost:5000/api/auth/register/verify",
+>>>>>>> 787ec18 (Added Recent Services API)
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -269,7 +273,11 @@
 							"path": [
 								"api",
 								"auth",
+<<<<<<< HEAD
 								"",
+=======
+								"register",
+>>>>>>> 787ec18 (Added Recent Services API)
 								"verify"
 							]
 						}
@@ -412,7 +420,11 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
+<<<<<<< HEAD
 							"raw": "{\n    \"bookingDetails\": {\n        \"name\": \"Aditya Choudhury\",\n        \"phone\": 9668111905,\n        \"email\": \"adityasubham03@gmail.com\",\n        \"city\": \"Bhubaneswar\",\n        \"bike_Company\": \"Hero\",\n        \"bike_Model\": \"Xtreme 2013\"\n    },\n    \"address\": {\n        \"address\": \"KIIT\",\n        \"street\": \"KIIT Road\",\n        \"landmark\": \"KIIT\"\n    },\n    \"map\": {\n        \"longitude\": 85.8172369,\n        \"latitude\": 20.3535322\n    }\n}",
+=======
+							"raw": "{\n    \"name\":\"Aditya Choudhury\",\n    \"phone\":9668111905,\n    \"email\":\"adityasubham03@gmail.com\",\n    \"city\":\"Bhubaneswar\",\n    \"bike_Company\":\"Hero\",\n    \"bike_Model\":\"Xtreme 2013\",\n    \"street\":\"rt\",\n    \"landmark\":\"123\",\n    \"address\":\"ganga nagar\",\n    \"map\":{\n        \"longitude\":85.8186577,\n        \"latitude\":20.2642714\n    }\n}",
+>>>>>>> 787ec18 (Added Recent Services API)
 							"options": {
 								"raw": {
 									"language": "json"
