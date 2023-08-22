@@ -128,8 +128,7 @@ const viewBookingPartner = async (req, res, next) => {
 
 const viewBookingPartnerByID = async (req, res, next) => {
 	let partnerId = req.phone;
-	const { id } = req.body;
-	console.log(id);	
+	const { id } = req.params;	
 	if (!id) {
 		return res.status(404).json({
 			success: false,
@@ -141,7 +140,7 @@ const viewBookingPartnerByID = async (req, res, next) => {
 	try {
 		bookings = await bike.findById(id);
 		if (bookings) {
-			return res.status(200).json({ data: { ...bookings._doc }, success: "true" });
+			return res.status(200).json(bookings);
 		} else {
 			return res
 				.status(404)
@@ -196,5 +195,5 @@ module.exports = {
 	viewBookingUser,
 	viewBookingPartner,
 	viewRecents,
-viewBookingPartnerByID,
+	viewBookingPartnerByID,
 };
