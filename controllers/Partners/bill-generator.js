@@ -48,6 +48,29 @@ const generateBill = async (req, res, next) => {
 	}
 };
 
+const viewBill = async (req, res, next) => {
+	const { billid } = req.params;
+	if (!billid) {
+		return res.status(404).json(
+			"No billId found!!"
+		);
+	}
+
+	try {
+		const bill = await Bill.findById(billid);
+		if (!bill) {
+			return res.status(404).json("No Bill Associated with bill-id");
+		}
+
+		return res.status(200).json(bill);
+	} catch (err) {
+		console.log(err);
+		return res.status(500).json("Internal Server Error");
+	}
+
+};
+
 module.exports = {
 	generateBill,
+	viewBill,
 };
